@@ -1,0 +1,15 @@
+<IfModule mod_rewrite.c>
+    Options +FollowSymLinks
+    RewriteEngine On
+    RewriteCond %{HTTPS} !=on
+    RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+    RewriteCond %{REQUEST_URI} !^/public/ 
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteCond %{REQUEST_FILENAME} !-f
+    #Block access to sensitive files and directories
+    RewriteRule ^(\.env|\.git|\.gitignore|\.htaccess|\.htpasswd|composer\.lock|composer\.json|node_modules|vendor|storage\/logs\/.*|tests|public) - [F]
+    # Redirect all requests to the public directory
+    RewriteRule ^(.*)$ /public/$1 
+    #RewriteRule ^ index.php [L]
+    RewriteRule ^(/)?$ public/index.php [L] 
+</IfModule>

@@ -1,0 +1,64 @@
+.fixed-top{
+    position: relative !important;
+}
+.steps {
+    font-size: 12px;
+
+    .first {
+        background-color: gray;
+        color: white;
+        transition: color 1s ease;
+        transition: background 1s ease;
+
+        &:hover {
+            background-color: rgb(162, 162, 3);
+        }
+    }
+    .second {
+        background-color: rgb(109, 109, 109);
+        color: white;
+        transition: color 1s ease;
+        transition: background 1s ease;
+
+        &:hover {
+            background-color: rgb(3, 128, 162);
+        }
+    }
+    .third {
+        background-color: gray;
+        color: white;
+        transition: color 1s ease;
+        transition: background 1s ease;
+
+        &:hover {
+            background-color: rgb(162, 162, 3);
+        }
+    }
+}
+
+//to-jobs
+.top-jobs{
+    background-color: #1C75BC;
+    ul{
+        li{
+            font-size: 14px;
+        }
+    }
+    .top-header{
+        h6{
+            font-size: 26px;
+            font-weight: 500;    
+        }
+       
+    }
+}
+
+//price
+.price{
+    .price-header{
+        h6{
+            font-size: 30px;
+        }
+        
+    }
+}

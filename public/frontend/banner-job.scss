@@ -1,0 +1,173 @@
+.fixed-top {
+    position: relative !important;
+}
+
+//head-banner
+.online-ads {
+    margin-top: 50px;
+    margin-bottom: 20px;
+
+    .hero-banner {
+        img {
+            height: 30px;
+            padding-right: 5px;
+        }
+
+        h6 {
+            font-weight: 700;
+            color: black;
+            font-size: 23px;
+        }
+
+    }
+}
+
+//whymegajob
+.whymj {
+    background-color: #1C75BC;
+
+    .whyus {
+        h6 {
+            font-size: 26px;
+            font-weight: 500;
+        }
+    }
+
+    .whyus2 {
+        img {
+            height: 225px;
+        }
+    }
+}
+
+//AVAILABLE SIZE & PLACE
+.availability {
+    .size-header {
+        background-color: #1C75BC;
+        color: white;
+        padding: 6px;
+
+        h6 {
+            font-size: 20px;
+            font-weight: 500;
+        }
+    }
+
+    .size-text {
+        font-size: 14px;
+    }
+
+    .size-header2 {
+        background-color: #F15A29;
+        color: white;
+        padding: 6px;
+
+        h6 {
+            font-size: 20px;
+            font-weight: 500;
+        }
+    }
+
+    .size-text2 {
+        font-size: 14px;
+    }
+}
+
+//our services
+.ourservices {
+    background-color: #1C75BC;
+
+    .our-text {
+        h6 {
+            font-size: 26px;
+            font-weight: 500;
+        }
+    }
+
+    .overflow {
+
+        .tjobs {
+            background-color: white;
+            border-radius: 1.2rem;
+            padding-top: 20px;
+            padding-bottom: 20px;
+            transition: all 0.5s;
+
+            a {
+                text-decoration: none;
+            }
+
+            img {
+                width: 64px;
+                height: auto;
+            }
+
+            h6 {
+                font-size: 20px;
+                font-weight: 500;
+            }
+
+            &:hover {
+                transform: scale(1.1);
+            }
+
+        }
+    }
+
+}
+
+//trust
+.trust-header {
+    h6 {
+        font-size: 23px;
+        font-weight: 500;
+        color: black;
+    }
+}
+
+
+
+//partner
+h2 {
+    text-align: center;
+    padding: 20px;
+}
+
+.swiper {
+    img {
+        filter: grayscale(100%);
+        &:hover {
+            filter: grayscale(0%);
+        }
+    }
+
+   
+}
+
+
+
+
+
+
+
+
+
+//touch
+.touch {
+    background-color: #1C75BC;
+
+    .rounded-img {
+        max-width: 120px;
+        width: 97px;
+        height: 97px;
+        border-radius: 1.2rem;
+        margin-right: 10px;
+    }
+
+    .touch-text {
+        a {
+            text-decoration: none;
+            color: white;
+        }
+    }
+}

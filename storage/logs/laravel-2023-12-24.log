@@ -1,0 +1,71 @@
+[2023-12-24 11:37:24] production.INFO: Detected N+1 Query  
+[2023-12-24 11:37:24] production.INFO: Model: App\Models\User
+Relation: job_seeker
+Num-Called: 2
+Call-Stack:
+#18 /storage/framework/views/6c345b11470cdca7af461a4439fe9ec0fe694a5c.php:36
+#20 /vendor/laravel/framework/src/Illuminate/Filesystem/Filesystem.php:110
+#21 /vendor/laravel/framework/src/Illuminate/View/Engines/PhpEngine.php:58
+#22 /vendor/laravel/framework/src/Illuminate/View/Engines/CompilerEngine.php:70
+#23 /vendor/laravel/framework/src/Illuminate/View/View.php:195
+#24 /vendor/laravel/framework/src/Illuminate/View/View.php:178
+#25 /vendor/laravel/framework/src/Illuminate/View/View.php:147
+#26 /storage/framework/views/7f08c0bc9add705251d8bb02ef14e78416da5fc1.php:40
+#28 /vendor/laravel/framework/src/Illuminate/Filesystem/Filesystem.php:110
+#29 /vendor/laravel/framework/src/Illuminate/View/Engines/PhpEngine.php:58
+#30 /vendor/laravel/framework/src/Illuminate/View/Engines/CompilerEngine.php:70
+#31 /vendor/laravel/framework/src/Illuminate/View/View.php:195
+#32 /vendor/laravel/framework/src/Illuminate/View/View.php:178
+#33 /vendor/laravel/framework/src/Illuminate/View/View.php:147
+#34 /vendor/laravel/framework/src/Illuminate/Http/Response.php:69
+#35 /vendor/laravel/framework/src/Illuminate/Http/Response.php:35
+#36 /vendor/laravel/framework/src/Illuminate/Routing/Router.php:906
+#37 /vendor/laravel/framework/src/Illuminate/Routing/Router.php:875
+#38 /vendor/laravel/framework/src/Illuminate/Routing/Router.php:798
+#39 /vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php:141
+#40 /app/Http/Middleware/Admin.php:26
+#41 /vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php:180
+#42 /vendor/spatie/laravel-permission/src/Middlewares/RoleMiddleware.php:27
+#43 /vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php:180
+#44 /vendor/laravel/framework/src/Illuminate/Routing/Middleware/SubstituteBindings.php:50
+#45 /vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php:180
+#46 /vendor/laravel/framework/src/Illuminate/Auth/Middleware/Authenticate.php:44
+#47 /vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php:180
+#48 /vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/VerifyCsrfToken.php:78
+#49 /vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php:180
+  
+[2023-12-24 11:37:24] production.INFO: Model: App\Models\User
+Relation: job_seeker_education
+Num-Called: 2
+Call-Stack:
+#18 /app/Models/User.php:105
+#19 /storage/framework/views/6c345b11470cdca7af461a4439fe9ec0fe694a5c.php:45
+#21 /vendor/laravel/framework/src/Illuminate/Filesystem/Filesystem.php:110
+#22 /vendor/laravel/framework/src/Illuminate/View/Engines/PhpEngine.php:58
+#23 /vendor/laravel/framework/src/Illuminate/View/Engines/CompilerEngine.php:70
+#24 /vendor/laravel/framework/src/Illuminate/View/View.php:195
+#25 /vendor/laravel/framework/src/Illuminate/View/View.php:178
+#26 /vendor/laravel/framework/src/Illuminate/View/View.php:147
+#27 /storage/framework/views/7f08c0bc9add705251d8bb02ef14e78416da5fc1.php:40
+#29 /vendor/laravel/framework/src/Illuminate/Filesystem/Filesystem.php:110
+#30 /vendor/laravel/framework/src/Illuminate/View/Engines/PhpEngine.php:58
+#31 /vendor/laravel/framework/src/Illuminate/View/Engines/CompilerEngine.php:70
+#32 /vendor/laravel/framework/src/Illuminate/View/View.php:195
+#33 /vendor/laravel/framework/src/Illuminate/View/View.php:178
+#34 /vendor/laravel/framework/src/Illuminate/View/View.php:147
+#35 /vendor/laravel/framework/src/Illuminate/Http/Response.php:69
+#36 /vendor/laravel/framework/src/Illuminate/Http/Response.php:35
+#37 /vendor/laravel/framework/src/Illuminate/Routing/Router.php:906
+#38 /vendor/laravel/framework/src/Illuminate/Routing/Router.php:875
+#39 /vendor/laravel/framework/src/Illuminate/Routing/Router.php:798
+#40 /vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php:141
+#41 /app/Http/Middleware/Admin.php:26
+#42 /vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php:180
+#43 /vendor/spatie/laravel-permission/src/Middlewares/RoleMiddleware.php:27
+#44 /vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php:180
+#45 /vendor/laravel/framework/src/Illuminate/Routing/Middleware/SubstituteBindings.php:50
+#46 /vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php:180
+#47 /vendor/laravel/framework/src/Illuminate/Auth/Middleware/Authenticate.php:44
+#48 /vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php:180
+#49 /vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/VerifyCsrfToken.php:78
+  

@@ -1,0 +1,22 @@
+.theme-cyan .sidebar-nav .metismenu a:hover i, .theme-cyan .sidebar-nav .metismenu a:focus i {
+    background: #17C2D7;
+    color: #fff;
+}
+.top_counter .icon.bg-colors{
+    background-color: #17C2D7;
+}
+.content span{
+    color:#17C2D7;
+}
+.input-group:hover .custom-input-prepend{
+    background-color: #17c2d7;
+}
+.input-group:hover .custom-input-prepend span{
+    color: white;
+}
+.input-group:hover .custom-input-prepend label{
+    color: white;
+}
+a {
+    color: #17c2d7;
+}

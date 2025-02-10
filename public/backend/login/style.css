@@ -1,0 +1,409 @@
+@import url(https://fonts.googleapis.com/css?family=Lobster);
+
+@import url(https://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.min.css);
+
+body {
+    background-image: url(https://subtlepatterns.com/patterns/bedge_grunge.png);
+    background-position: initial initial;
+    background-repeat: initial initial;
+}
+
+h1 {
+    font-family: "Lobster";
+    font-size: 32pt;
+    color: rgb(255, 153, 0);
+    text-shadow: 0px 2px 3px rgb(255, 238, 204);
+    text-align: center;
+    padding: 6px 0px 0px 0px;
+    margin: 6px 0px 0px 0px;
+}
+
+.alert .inner {
+    display: block;
+    padding: 6px;
+    margin: 6px;
+    border-radius: 3px;
+    border: 1px solid rgb(180,180,180);
+    background-color: rgb(212,212,212);
+}
+
+.alert .close {
+    float: right;
+    margin: 3px 12px 0px 0px;
+    cursor: pointer;
+}
+
+.alert .inner,.alert .close {
+    color: rgb(88,88,88);
+}
+
+.alert input {
+    display: none;
+}
+
+.alert input:checked ~ * {
+    animation-name: dismiss,hide;
+    animation-duration: 300ms;
+    animation-iteration-count: 1;
+    animation-timing-function: ease;
+    animation-fill-mode: forwards;
+    animation-delay: 0s,100ms;
+}
+
+.alert.error .inner {
+    border: 1px solid rgb(238,211,215);
+    background-color: rgb(242,222,222);
+}
+
+.alert.error .inner,.alert.error .close {
+    color: rgb(185,74,72);
+}
+
+.alert.success .inner {
+    border: 1px solid rgb(214,233,198);
+    background-color: rgb(223,240,216);
+}
+
+.alert.success .inner,.alert.success .close {
+    color: rgb(70,136,71);
+}
+
+.alert.info .inner {
+    border: 1px solid rgb(188,232,241);
+    background-color: rgb(217,237,247);
+}
+
+.alert.info .inner,.alert.info .close {
+    color: rgb(58,135,173);
+}
+
+.alert.warning .inner {
+    border: 1px solid rgb(251,238,213);
+    background-color: rgb(252,248,227);
+}
+
+.alert.warning .inner,.alert.warning .close {
+    color: rgb(192,152,83);
+}
+
+@keyframes dismiss {
+    0% {
+        opacity: 1;
+    }
+    90%, 100% {
+        opacity: 0;
+        font-size: 0.1px;
+        transform: scale(0);
+    }
+}
+
+@keyframes hide {
+    100% {
+        height: 0px;
+        width: 0px;
+        overflow: hidden;
+        margin: 0px;
+        padding: 0px;
+        border: 0px;
+    }
+}
+/* colors */
+
+html {
+    width: 100%;
+    height: 100%;
+}
+
+body {
+    background-image: url('./admin-bg.png');
+    background-size:cover;
+    background-position: bottom;
+    background-repeat: no-repeat;
+    position: relative;
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    font-size: 16px;
+    margin:0;
+    padding:0;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 400;
+    -webkit-font-smoothing: antialiased;
+    overflow:hidden;
+}
+
+form {
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%) scale(0.75);
+    transform: translate(-50%, -50%) scale(0.75);
+    display: block;
+    width: 100%;
+    max-width: 400px;
+    background-color: #FFF;
+    margin: 0;
+    padding: 2.25em;
+    -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+    border: solid 1px #DDD;
+    border-radius: .5em;
+    font-family: 'Montserrat', sans-serif;
+}
+form .svgContainer {
+    position: relative;
+    width: 200px;
+    height: 200px;
+    margin: 0 auto 1em;
+    border-radius: 50%;
+    pointer-events: none;
+}
+form .svgContainer div {
+    position: relative;
+    width: 100%;
+    height: 0;
+    overflow: hidden;
+    border-radius: 50%;
+    padding-bottom: 100%;
+}
+form .svgContainer .mySVG {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+form .svgContainer:after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 10;
+    width: inherit;
+    height: inherit;
+    -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+    border: solid 2.5px #217093;
+    border-radius: 50%;
+}
+form .inputGroup {
+    margin: 0 0 2em;
+    padding: 0;
+    position: relative;
+}
+form .inputGroup:last-of-type {
+    margin-bottom: 0;
+}
+form label {
+    margin: 0 0 12px;
+    display: block;
+    font-size: 1.25em;
+    color: #217093;
+    font-weight: 700;
+    font-family: inherit;
+}
+form input[type='email'], form input[type="text"], form input[type="number"], form input[type="url"], form input[type="search"], form input[type="password"] {
+    display: block;
+    padding-left:15px;
+    padding-right:15px;
+    margin: 0;
+    background-color: #f3fafd;
+    border: solid 2px #217093;
+    border-radius: 4px;
+    -webkit-appearance: none;
+    -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+    width: 100%;
+    height: 45px;
+    font-size: 18px;
+    color: #353538;
+    font-weight: 400;
+    font-family: inherit;
+    -webkit-transition: border-color .25s ease-out, -webkit-box-shadow .2s linear;
+    transition: border-color .25s ease-out, -webkit-box-shadow .2s linear;
+    transition: box-shadow .2s linear, border-color .25s ease-out;
+    transition: box-shadow .2s linear, border-color .25s ease-out, -webkit-box-shadow .2s linear;
+}
+form input[type='email']:focus, form input[type="text"]:focus, form input[type="number"]:focus, form input[type="url"]:focus, form input[type="search"]:focus, form input[type="password"]:focus {
+    outline: none;
+    -webkit-box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
+            box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
+    border: solid 2px #4eb8dd;
+}
+form button {
+    display: block;
+    margin: 0;
+    background-color: #4eb8dd;
+    border: none;
+    border-radius: 4px;
+    -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+    -webkit-box-shadow: none;
+            box-shadow: none;
+    width: 100%;
+    padding:10px;
+    font-size: 18px;
+    color: #FFF;
+    font-weight: 600;
+    font-family: inherit;
+    -webkit-transition: background-color .2s ease-out;
+    transition: background-color .2s ease-out;
+}
+form button:hover, form button:active {
+    background-color: #217093;
+}
+.form button:hover{
+    cursor: pointer;
+}
+form .inputGroup1 .helper {
+    position: absolute;
+    z-index: 1;
+    font-family: inherit;
+}
+form .inputGroup1 .helper1 {
+    bottom: 33px;
+    left: 0;
+    -webkit-transform: translate(1em, 2.2em) scale(1);
+    transform: translate(1em, 2.2em) scale(1);
+    -webkit-transform-origin: 0 0;
+    transform-origin: 0 0;
+    color: #217093;
+    font-size: 16px;
+    font-weight: 200;
+    opacity: .65;
+    pointer-events: none;
+    transition: opacity .2s linear, -webkit-transform .2s ease-out;
+    -webkit-transition: opacity .2s linear, -webkit-transform .2s ease-out;
+    transition: transform .2s ease-out, opacity .2s linear;
+    transition: transform .2s ease-out, opacity .2s linear, -webkit-transform .2s ease-out;
+}
+form .inputGroup1.focusWithText .helper {
+    -webkit-transform: translate(1em, 1.55em) scale(0.6);
+    transform: translate(1em, 1.55em) scale(0.6);
+    opacity: 0;
+}
+form .inputGroup2 input[type="password"] {
+    padding: .4em 1em .5em;
+}
+form .inputGroup2 input[type="text"] {
+    padding: .025em 1em 0;
+}
+form .inputGroup2 #showPasswordToggle {
+    display: block;
+    padding: 0 0 0 1.45em;
+    position: absolute;
+    top: .25em;
+    right: 0;
+    font-size: 1em;
+}
+form .inputGroup2 #showPasswordToggle input {
+    position: absolute;
+    z-index: -1;
+    opacity: 0;
+}
+form .inputGroup2 #showPasswordToggle .indicator {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: .85em;
+    width: .85em;
+    background-color: #f3fafd;
+    border: solid 2px #217093;
+    border-radius: 3px;
+}
+form .inputGroup2 #showPasswordToggle .indicator:after {
+    content: "";
+    position: absolute;
+    left: .25em;
+    top: .025em;
+    width: .2em;
+    height: .5em;
+    border: solid #217093;
+    border-width: 0 3px 3px 0;
+    -webkit-transform: rotate(45deg);
+    transform: rotate(45deg);
+    visibility: hidden;
+}
+form .inputGroup2 #showPasswordToggle input:checked ~ .indicator:after {
+    visibility: visible;
+}
+form .inputGroup2 #showPasswordToggle input:focus ~ .indicator, form .inputGroup2 #showPasswordToggle input:hover ~ .indicator {
+    border-color: #4eb8dd;
+}
+form .inputGroup2 #showPasswordToggle input:disabled ~ .indicator {
+    opacity: .5;
+}
+form .inputGroup2 #showPasswordToggle input:disabled ~ .indicator:after {
+    visibility: hidden;
+}
+
+/* Added Code */
+.image-container{
+    position: absolute;
+    left:50%;
+    bottom:30px;
+    -webkit-transform:translateX(-50%);
+            transform:translateX(-50%);
+
+    display:-webkit-box;
+
+    display:-ms-flexbox;
+
+    display:flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+            flex-direction: row;
+    width:300px;
+    -webkit-box-pack: space-evenly;
+        -ms-flex-pack: space-evenly;
+            justify-content: space-evenly;
+}
+.image-container img{
+    max-width:50px;
+}
+.foot-note{
+    position: absolute;
+    bottom:0;
+    right:5px;
+}
+
+@media only screen and (max-width:600px){
+    body{
+        overflow-y: scroll;
+        background-image:url('./admin-bg-mob2.png');
+    }
+    form{
+        -webkit-transform: none;
+        transform: none;
+        position: relative;
+        top:auto;
+        left:auto;
+        max-width:100%;
+        margin-bottom:32px;
+    }
+    .image-container{
+        position: relative;
+        top:auto;
+        left:auto;
+        bottom:auto;
+        right:auto;
+        width:auto;
+        -webkit-transform: none;
+                transform: none;
+        padding:20px 80px;
+    }
+    .foot-note{
+        position: relative;
+        top:auto;
+        left:auto;
+        bottom:auto;
+        right:auto;
+        text-align: center;
+        margin-top:0;
+        margin-bottom: 32px;
+    }
+}
+
+

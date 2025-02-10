@@ -1,0 +1,55 @@
+.fixed-top {
+  position: relative !important;
+}
+
+.steps {
+  font-size: 12px;
+}
+.steps .first {
+  background-color: gray;
+  color: white;
+  -webkit-transition: color 1s ease;
+  transition: color 1s ease;
+  -webkit-transition: background 1s ease;
+  transition: background 1s ease;
+}
+.steps .first:hover {
+  background-color: rgb(162, 162, 3);
+}
+.steps .second {
+  background-color: rgb(109, 109, 109);
+  color: white;
+  -webkit-transition: color 1s ease;
+  transition: color 1s ease;
+  -webkit-transition: background 1s ease;
+  transition: background 1s ease;
+}
+.steps .second:hover {
+  background-color: rgb(3, 128, 162);
+}
+.steps .third {
+  background-color: gray;
+  color: white;
+  -webkit-transition: color 1s ease;
+  transition: color 1s ease;
+  -webkit-transition: background 1s ease;
+  transition: background 1s ease;
+}
+.steps .third:hover {
+  background-color: rgb(162, 162, 3);
+}
+
+.top-jobs {
+  background-color: #1C75BC;
+}
+.top-jobs ul li {
+  font-size: 14px;
+}
+.top-jobs .top-header h6 {
+  font-size: 26px;
+  font-weight: 500;
+}
+
+.price .price-header h6 {
+  font-size: 30px;
+}/*# sourceMappingURL=job-services.css.map */

@@ -1,0 +1,117 @@
+
+
+.online-ads {
+  margin-top: 50px;
+  margin-bottom: 20px;
+}
+.online-ads .hero-banner img {
+  height: 30px;
+  padding-right: 5px;
+}
+.online-ads .hero-banner h6 {
+  font-weight: 700;
+  color: black;
+  font-size: 23px;
+}
+
+.whymj {
+  background-color: #1C75BC;
+}
+.whymj .whyus h6 {
+  font-size: 26px;
+  font-weight: 500;
+}
+.whymj .whyus2 img {
+  height: 225px;
+}
+
+.availability .size-header {
+  background-color: #1C75BC;
+  color: white;
+  padding: 6px;
+}
+.availability .size-header h6 {
+  font-size: 20px;
+  font-weight: 500;
+}
+.availability .size-text {
+  font-size: 14px;
+}
+.availability .size-header2 {
+  background-color: #F15A29;
+  color: white;
+  padding: 6px;
+}
+.availability .size-header2 h6 {
+  font-size: 20px;
+  font-weight: 500;
+}
+.availability .size-text2 {
+  font-size: 14px;
+}
+
+.ourservices {
+  background-color: #1C75BC;
+}
+.ourservices .our-text h6 {
+  font-size: 26px;
+  font-weight: 500;
+}
+.ourservices .overflow .tjobs {
+  background-color: white;
+  border-radius: 1.2rem;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  -webkit-transition: all 0.5s;
+  transition: all 0.5s;
+}
+.ourservices .overflow .tjobs a {
+  text-decoration: none;
+}
+.ourservices .overflow .tjobs img {
+  width: 64px;
+  height: auto;
+}
+.ourservices .overflow .tjobs h6 {
+  font-size: 20px;
+  font-weight: 500;
+}
+.ourservices .overflow .tjobs:hover {
+  -webkit-transform: scale(1.1);
+          transform: scale(1.1);
+}
+
+.trust-header h6 {
+  font-size: 23px;
+  font-weight: 500;
+  color: black;
+}
+
+h2 {
+  text-align: center;
+  padding: 20px;
+}
+
+.swiper img {
+  -webkit-filter: grayscale(100%);
+          filter: grayscale(100%);
+}
+.swiper img:hover {
+  -webkit-filter: grayscale(0%);
+          filter: grayscale(0%);
+}
+
+.touch {
+  background-color: #1C75BC;
+}
+.touch .rounded-img {
+  max-width: 120px;
+  width: 97px;
+  height: 97px;
+  border-radius: 1.2rem;
+  margin-right: 10px;
+}
+.touch .touch-text a {
+  text-decoration: none;
+  color: white;
+}/*# sourceMappingURL=banner-job.css.map */

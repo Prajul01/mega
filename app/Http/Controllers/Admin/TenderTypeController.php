@@ -1,0 +1,187 @@
+<?php
+
+namespace App\Http\Controllers\Admin;
+
+use App\Models\TenderType;
+use Illuminate\Support\Str;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\Controller;
+
+class TenderTypeController extends Controller
+{
+
+    public function __construct()
+    {
+        $this->middleware('permission:tender-list', ['only' => ['index', 'show']]);
+        $this->middleware('permission:tender-create', ['only' => ['create', 'store']]);
+        $this->middleware('permission:tender-edit', ['only' => ['edit', 'update']]);
+        $this->middleware('permission:tender-delete', ['only' => ['destroy']]);
+    }
+    public function index()
+    {
+        $tender_type = TenderType::orderBy('order_no')->get();
+        $status = 'index';
+        return view('admin.tender_type.index',['tender_types'=>$tender_type, 'status'=>$status]);
+    }
+
+    public function tender_typestatus(Request $request)
+    {
+        if ($request->mode == 'true') {
+            DB::table('tender_type')->where('id', $request->id)->update(['status' => 'active']);
+        } else {
+            DB::table('tender_type')->where('id', $request->id)->update(['status' => 'inactive']);
+
+        }
+        return response()->json(['msg' => 'Successfully updated Status.', 'status' => true]);
+
+    }
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request)
+    {
+        $this->validate($request, [
+            'title' => 'required',
+            'status'=>'nullable| in:active,inactive',
+        ]);
+        $data=new TenderType();
+        if (!isset($request->status)) {
+            $data->status = 'inactive';
+        }else{
+            $data->status = $request->status;
+        }
+        $data->order_no =  TenderType::max('order_no') + 1;
+        $slug = Str::slug($request->title);
+        $slug_count =  TenderType::where('slug', $slug)->count();
+        if ($slug_count > 0) {
+            $slug = TenderType::createSlug($request->title, 0);
+        }
+        $data->slug = $slug;
+        $data->title=$request->title;
+        $data->save();
+        if ($data) {
+            return redirect()->route('admin.tender_type.index')->with('success', 'Successfully created tender_type.');
+
+        } else {
+            return back()->with('error', 'Something went wrong!');
+        }
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show($id)
+    {
+        //
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($id)
+    {
+        $tender_type =  TenderType::findOrFail(base64_decode($id));
+        if ($tender_type) {
+            $status = 'edit';
+            return view('admin.tender_type.index',['tender_type'=>$tender_type, 'status'=>$status]);
+        } else {
+            return back()->with('error', 'Data not Found.');
+        }
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, $id)
+    {
+        $tender_type =  TenderType::findOrFail(base64_decode($id));
+        $this->validate($request, [
+            'title' => 'required',
+            'status' => 'nullable|in:active,inactive',
+        ]);
+        if (!isset($request->status)) {
+            $tender_type->status = 'inactive';
+        }else{
+            $tender_type->status = $request->status;
+        }
+        if($tender_type->title != $request->title){
+            $slug =  TenderType::createSlug($request->title, 0);
+          }
+          if(isset($slug)){
+            if ( $tender_type->slug != $slug) {
+                $oldslug =  $tender_type->slug;
+                $tender_type->slug = $slug;
+            }
+        }else{
+            $slug =  $tender_type->slug;
+        }
+        $tender_type->slug=$slug;
+        $tender_type->title=$request->title;
+        $tender_type->save();
+        if ($tender_type) {
+            return redirect()->route('admin.tender_type.index')->with('success', 'Successfully updated tender_type.');
+
+        } else {
+            return back()->with('error', 'Something went wrong!');
+        }
+
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy(Request $request)
+    {
+        $tender_type =  TenderType::findOrFail($request->id);
+        $status = $tender_type->delete();
+        if ($status) {
+            return redirect()->route('admin.tender_type.index')->with('success', 'Tender Category successfully deleted.');
+        } else {
+            return back()->with('erroe', 'Something Wrong!');
+        }
+
+    }
+    public function set_order(Request $request)
+    {
+
+        $tender_type = new  TenderType();
+        $list_order = $request['list_order'];
+
+        $this->saveList($list_order);
+        $data = array('status' => 'success');
+        echo json_encode($data);
+        exit;
+    }
+
+    public function saveList($list, &$m_order = 0)
+    {
+
+        foreach ($list as $item) {
+            $m_order++;
+            $updateData = array("order_no" => $m_order);
+            TenderType::where('id', $item['id'])->update($updateData);
+        }
+    }
+    public function gettender_typeListFromDB()
+    {
+        $tender_type = TenderType::orderBy('order_no')->get();
+        return $tender_type;
+    }
+}
