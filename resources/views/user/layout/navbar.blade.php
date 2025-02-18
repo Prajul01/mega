@@ -146,8 +146,9 @@
                                         <p class=""><strong>Login with your email account.</strong></p>
                                     </div>
                                     <form action="{{ route('users.login') }}" method="post" class="auth-form">
-                                        @csrf
                                         <div class="mb-3">
+                                            <input type="hidden" name="_token" value="{{ csrf_token() }}">
+
                                             <label for="usernameInput" class="form-label">Username</label>
                                             <input type="text" name="username" class="form-control" id="usernameInput"
                                                 placeholder="Enter your username" required="">
@@ -184,7 +185,7 @@
                         <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#signupModal"
                             class="btn btn btn-outline-white position-relative"><i
                                 class="mdi mdi-login"></i>&nbsp;<span>Register CV</span> </a>
-                    </li>   
+                    </li>
                     <li class="list-inline-item employer-btn">
                         <a href="javascript:void(0)" class="zone-a position-relative" data-bs-toggle="dropdown"
                             aria-expanded="false">&nbsp;<span class="desktop-only">Empolyer Zone</span>
@@ -341,36 +342,36 @@
                                 <h5>Log In</h5>
                                 <p class="text-muted">Log In and get access to all the features of Jobcy</p>
                             </div>
-                            <form action="{{ route('users.login') }}" method="POST" class="auth-form">
-                                @csrf
-                                <div class="mb-3">
-                                    <label for="usernameInput" class="form-label">Username</label>
-                                    <input type="text" name="username" class="form-control" id="usernameInput"
-                                        placeholder="Enter your username">
-
-                                </div>
-                                <div class="mb-3">
-                                    <label for="passwordInput" class="form-label">Password</label>
-                                    <input type="password" name="password" class="form-control" id="passwordInput"
-                                        placeholder="Password">
-                                </div>
-                                <div class="mb-4">
-                                    <div class="form-check">
-                                        <a href="#" class="float-start">Forgot
-                                            Password?</a>
-                                    </div>
-                                </div>
-                                <div class="text-center">
-                                    <button type="submit" class="btn btn-primary w-100">Log In</button>
-                                </div>
-                                <hr>
-                                <div class="text-center">
-                                    <a href="{{ route('googleLogin') }}"
-                                        class="btn btn-outline-secondary btn-hover w-100"><i
-                                            class="fa-brands fa-google"></i> &nbsp;&nbsp;Log In with
-                                        Google</a>
-                                </div>
-                            </form>
+<!--                            <form action="{{ route('users.login') }}" method="POST" class="auth-form">-->
+<!--                                @csrf-->
+<!--                                <div class="mb-3">-->
+<!--                                    <label for="usernameInput" class="form-label">Username</label>-->
+<!--                                    <input type="text" name="username" class="form-control" id="usernameInput"-->
+<!--                                        placeholder="Enter your username">-->
+<!---->
+<!--                                </div>-->
+<!--                                <div class="mb-3">-->
+<!--                                    <label for="passwordInput" class="form-label">Password</label>-->
+<!--                                    <input type="password" name="password" class="form-control" id="passwordInput"-->
+<!--                                        placeholder="Password">-->
+<!--                                </div>-->
+<!--                                <div class="mb-4">-->
+<!--                                    <div class="form-check">-->
+<!--                                        <a href="#" class="float-start">Forgot-->
+<!--                                            Password?</a>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                                <div class="text-center">-->
+<!--                                    <button type="submit" class="btn btn-primary w-100">Log In</button>-->
+<!--                                </div>-->
+<!--                                <hr>-->
+<!--                                <div class="text-center">-->
+<!--                                    <a href="{{ route('googleLogin') }}"-->
+<!--                                        class="btn btn-outline-secondary btn-hover w-100"><i-->
+<!--                                            class="fa-brands fa-google"></i> &nbsp;&nbsp;Log In with-->
+<!--                                        Google</a>-->
+<!--                                </div>-->
+<!--                            </form>-->
                         </div>
                     </div>
                 </div>

@@ -27,6 +27,8 @@
         </section>
         <!-- End Home -->
 
+
+
         <section class="job-categories landing-negative">
             <div class="container">
                 <ul class="job-list-menu nav nav-pills nav-justified flex-column flex-sm-row mb-4" id="pills-tab"
@@ -54,6 +56,8 @@
                 </ul>
             </div>
         </section>
+
+
 
         <section class="job-categories landing-negative no-negative bg-gray">
             <div class="container">
@@ -300,7 +304,7 @@
                            $advertisement->views= $advertisement->views+1;
                            $advertisement->save();
                          }
-                       
+
                         @endphp
                         @if(isset($advertisement))
                         <div class="banner-wrapper">
@@ -549,6 +553,7 @@
                                             aria-labelledby="part-time-tab">
                                             <div class="row job-box-wrapper">
                                                 @foreach ($newspaper_jobs as $job)
+
                                                     <div class="col-lg-4 col-md-6">
                                                         <div class="job-box card mt-2">
                                                             <div class="px-3 py-2">
@@ -908,7 +913,14 @@
             </div>
         </section>
 
+
+
         <!-- START CLIENT -->
         {{--  @include('user.layout.employers') --}}
         <!-- END CLIENT -->
+
+<!--        --><?php
+//
+//        dd('sasa')
+//        ?>
     @endsection

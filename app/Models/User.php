@@ -175,4 +175,9 @@ class User extends Authenticatable
             ->where('id', '<>', $id)
             ->get();
     }
+
+    public function job_seeker_experience()
+    {
+      return $this->hasOne(JobSeekerExperience::class,'user_id');
+    }
 }

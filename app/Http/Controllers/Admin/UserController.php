@@ -98,7 +98,7 @@ class UserController extends Controller
         }
 
         return view('admin.users.index', compact('user'));
-        
+
     }
 
     /**

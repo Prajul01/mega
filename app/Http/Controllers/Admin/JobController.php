@@ -157,7 +157,7 @@ class JobController extends Controller
             $data->banner = $filename;
         }
 
-        
+
         if ($request->hasFile('newspaper_image')) {
             $image = $request->file('newspaper_image');
             $filename = time() . '.' . $image->getClientOriginalExtension();
@@ -255,7 +255,7 @@ class JobController extends Controller
         $employeeType = EmployeeType::where('status', 'active')->orderBy('order_no')->get();
         $skill = Skill::where('status', 'active')->orderBy('order_no')->get();
         $status = 'edit';
-        
+
         return view('admin.job.index', [
             'job' => $job,
             'status' => $status,
@@ -326,7 +326,7 @@ class JobController extends Controller
             'status' => 'nullable| in:active,inactive',
             'employee_type' => 'required',
         ]);
-        
+
         $today = today();
         if (!isset($request->status)) {
             $data->status = 'inactive';
@@ -342,16 +342,16 @@ class JobController extends Controller
         }else{
             $slug = $data->slug;
         }
-        
+
         $path = public_path() . '/storage/job/' . $slug;
         $folderPath = 'public/job/' . $slug;
-        
-        
+
+
         $data->slug = $slug;
         if (!file_exists($path)) {
             Storage::makeDirectory($folderPath, 0755, true, true);
         }
-        
+
         if ($request->hasFile('banner')) {
             $image = $request->file('banner');
             $filename = time() . '.' . $image->extension();
@@ -399,7 +399,7 @@ class JobController extends Controller
         $data->company_category_id = $request->company_category;
         $data->employee_type_id = $request->employee_type;
         $data->update();
-        
+
         $job_id = $data->id;
         if (isset($request->license_id)) {
             License::where('job_id', $data->id)->delete();
@@ -507,12 +507,12 @@ class JobController extends Controller
          $job = Job::where('slug', $slug)->with([
                 'applied_users.job_seeker',
                 'applied_users.job_seeker_education',
-            ])->first();        
+            ])->first();
 
         if ($job == [] || $job == null) {
             return redirect()->route('admin.job.index')->with('errors', 'Job not found');
         }
-       
+
         $users = $job->applied_users;
 
 

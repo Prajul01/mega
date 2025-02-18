@@ -11,7 +11,7 @@ table tr td, table tr th{
 }
 @media print {
     html, body {
-        print-color-adjust: exact; 
+        print-color-adjust: exact;
     }
 }
 
@@ -86,6 +86,8 @@ table tr td, table tr th{
                 <td>{{ $user->job_seeker->mobile_number }}</td>
             </tr>
 
+
+
             <tr>
                 <th>Date of Birth:</th>
                 <td>{{ $user->job_seeker->date_of_birth }}</td>
@@ -95,10 +97,10 @@ table tr td, table tr th{
                 <th>Gender:</th>
                 <td>{{ $user->job_seeker->gender }}</td>
             </tr>
-             <tr>
-                <th>Experience:</th>
-                <td>{{ $user->job_seeker->experience }}</td>
-            </tr>
+<!--             <tr>-->
+<!--                <th>Experience:</th>-->
+<!--                <td>{{ $user->job_seeker->experience }}</td>-->
+<!--            </tr>-->
             <!--<tr>-->
             <!--    <th>Date of Birth:</th>-->
             <!--    <td>{{ $user->job_seeker->date_of_birth }}</td>-->
@@ -185,6 +187,69 @@ table tr td, table tr th{
                 <th>Career Objective: </th>
                 <td>{!! $user->job_seeker->career_objective !!}</td>
             </tr>
+            @if(isset($user->job_seeker_experience))
+            <tr>
+                <th colspan="2">Experience </th>
+            </tr>
+
+
+            <tr>
+                <th>Position</th>
+                <td>
+                    {{ json_decode($user->job_seeker_experience->position, true)[0] ?? 'N/A' }}
+                </td>
+            </tr>
+
+            <tr>
+                <th>Organization Name</th>
+                <td>
+                   {{ json_decode($user->job_seeker_experience->organization_name, true)[0] ?? 'N/A' }}
+                </td>
+
+            @if($user->job_seeker_experience->roles_and_responsibility)
+            <tr>
+                <th>Roles and Responsibilities</th>
+                <td>
+                    @php
+                    // Decode the string into a plain text
+                    $responsibilities = json_decode($user->job_seeker_experience->roles_and_responsibility, true)[0] ?? '';
+                    // Split the text by the numbers (1., 2., etc.)
+                    $responsibilities = preg_split('/(?=\d+\.)/', $responsibilities);
+                    @endphp
+
+                    @foreach($responsibilities as $responsibility)
+                    @if(trim($responsibility))
+                    {{ trim($responsibility) }}<br>
+                    @endif
+                    @endforeach
+                </td>
+            </tr>
+            @else
+            <tr>
+                <th>Roles and Responsibilities</th>
+                <td>N/A</td>
+            </tr>
+            @endif
+
+
+            <tr>
+                <th>Working From and To</th>
+                <td>
+
+                {{ json_decode($user->job_seeker_experience->joined_year, true)[0] ?? 'N/A' }} -
+                {{ json_decode($user->job_seeker_experience->left_year, true)[0] ?? 'Present' }}
+
+                </td>
+            </tr>
+            @else
+            <tr>
+                <th colspan="2">Experience</th>
+            </tr>
+            <tr>
+                <td colspan="2">No experience data available</td>
+            </tr>
+            @endif
+
         </table>
     </div>
 </div>

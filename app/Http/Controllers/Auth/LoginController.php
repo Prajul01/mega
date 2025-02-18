@@ -55,6 +55,7 @@ class LoginController extends Controller
             'username' => 'required',
             'password' => 'required',
         ]);
+//        dd($request->all());
 
         // If the class is using the ThrottlesLogins trait, we can automatically throttle
         // the login attempts for this application. We'll key this by the username and
@@ -75,15 +76,12 @@ class LoginController extends Controller
                 $request->session()->put('auth.password_confirmed_at', time());
             }
 
-            return $this->sendLoginResponse($request);
         }
 
         // If the login attempt was unsuccessful we will increment the number of attempts
         // to login and redirect the user back to the login form. Of course, when this
         // user surpasses their maximum number of attempts they will get locked out.
         $this->incrementLoginAttempts($request);
-
-        return $this->sendFailedLoginResponse($request);
     }
 
     /**
@@ -102,7 +100,7 @@ class LoginController extends Controller
             }
             return redirect()->route('admin.dashboard');
         }
-        
+
         // for employer
         if (Auth::user()->hasRole('employer')) {
             if (@$request->redirect_to) {

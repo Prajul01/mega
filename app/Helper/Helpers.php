@@ -128,7 +128,7 @@ class Helper
     /**
      * General Jobs =  any physical job with non-skilled, hands-on tasks, such as cleaning, moving or landscaping.
      * jobs are fetched according to user preference if authenticated
-     * if not then all jobs are fetched 
+     * if not then all jobs are fetched
      */
     public static function generalJobs()
     {
@@ -141,6 +141,13 @@ class Helper
         return $jobs;
     }
 
+    /**
+     * @return mixed
+     *
+     * If the user is logged in and has a preferred job category, the method will attempt to find active, preferred category jobs (with job_type = 2).
+     * If no preferred jobs are found, or if the user is not logged in, the method will fetch the latest 15 general active jobs (with job_type = 2).
+     * The jobs are retrieved with employer details included.
+     */
     public static function newspaperJobs()
     {
         $state = 0;
@@ -159,7 +166,7 @@ class Helper
                     $preferedId = $user->job_seeker->company_category_id;
                     $jobs_count = Job::where('status', 'active')
                         ->where('company_category_id', $preferedId)
-                        ->where('job_type', 2)
+                        ->where('job_type', 1)
                         ->count();
 
                     if ($jobs_count > 0) {
@@ -174,7 +181,7 @@ class Helper
                     $jobs = Job::where('status', 'active')
                         ->where('company_category_id', $preferedId)
                         ->with('employer')
-                        ->where('job_type', 2)
+                        ->where('job_type', 1)
                         ->limit(15)->latest()->get();
 
                     $state = 'f';
@@ -182,7 +189,7 @@ class Helper
 
                 case 3:
                     $jobs = Job::where('status', 'active')
-                        ->where('job_type', 2)
+                        ->where('job_type', 1)
                         ->with('employer')
                         ->latest()
                         ->limit(15)

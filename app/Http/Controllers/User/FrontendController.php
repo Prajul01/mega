@@ -38,11 +38,11 @@ class FrontendController extends Controller
     public function index()
     {
         $data = [
-            'top_jobs' => Helper::topJobs(),
-            'hot_jobs' => Helper::hotJobs(),
-            'recent_jobs' => Helper::recentJobs(),
-            'general_jobs' => Helper::generalJobs(),
-            'newspaper_jobs' => Helper::newspaperJobs(),
+            'top_jobs' => \App\Helper\Helpers\Helper::topJobs(),
+            'hot_jobs' => \App\Helper\Helpers\Helper::hotJobs(),
+            'recent_jobs' => \App\Helper\Helpers\Helper::recentJobs(),
+            'general_jobs' => \App\Helper\Helpers\Helper::generalJobs(),
+            'newspaper_jobs' => \App\Helper\Helpers\Helper::newspaperJobs(),
             'categories' => CompanyCategory::with('jobs')->where('status', 'active')->orderBy('order_no')->get(),
             'employers' => Employer::with('jobs')->where('status', 'active')->orderBy('order_no')->get(),
             'locations' => City::with('jobs')->where('status', 'active')->orderBy('order_no')->get(),
@@ -57,8 +57,8 @@ class FrontendController extends Controller
     {
         if (@$request->q) {
             $data['jobs'] = match ($request->q) {
-                'megajobs' => @Helper::topJobs(1, @$request->latest ? 'latest' : 'old'),
-                'premium-jobs' => @Helper::hotJobs(1, @$request->latest ? 'latest' : 'old'),
+                'megajobs' => \App\Helper\Helpers\Helper::topJobs(1, @$request->latest ? 'latest' : 'old'),
+                'premium-jobs' =>\App\Helper\Helpers\Helper::hotJobs(1, @$request->latest ? 'latest' : 'old'),
                 null => $this->getJobs($request),
                 default => $this->getJobs($request)
 
@@ -149,7 +149,7 @@ class FrontendController extends Controller
                 $data['jobs'] = Industry::where('slug', $request->industry)->first()->jobs();
             }
             if (@$request->company) {
-              
+
                 $data['jobs'] = Employer::where('slug', $request->company)->first()->jobs();
 
             }
@@ -357,10 +357,10 @@ class FrontendController extends Controller
      */
     public function applyJob($slug, Request $request)
     {
-       
-        
+
+
         $job = Job::where('slug', $slug)->first();
-       
+
         if (is_null($job) || empty($job)) {
             if (request()->ajax()) {
                  return response()->json([
@@ -380,7 +380,7 @@ class FrontendController extends Controller
 
         $user = auth()->user();
         if ($this->checkDetails()) {
-          
+
             if (request()->ajax()) {
                 return response()->json([
                     'status'=>'403',
@@ -479,7 +479,7 @@ class FrontendController extends Controller
 
         return response()
             ->json([
-                
+
                 'status' => 200,
                 'message' => 'Job removed'
             ]);

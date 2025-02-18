@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::table('user_applies_jobs', function (Blueprint $table) {
-            $table->string('created_at')->default(\DB::raw('CURRENT_TIMESTAMP'));
+            $table->timestamps();
 
         });
     }
