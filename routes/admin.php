@@ -57,6 +57,7 @@ Route::
                 Route::name('jobPosting.')->prefix('job-posting-management')->controller('JobPostingController')->group(function () {
                     Route::get('/{type?}', 'index')->name('index');
                     Route::post('/post-jobs/{type}', 'postJobs')->name('postJobs');
+
                 });
 
                 // employers
@@ -341,6 +342,9 @@ Route::
                 Route::name('jobRequest.')->prefix('job-requests')->controller('JobRequestController')->group(function () {
                     Route::get('/', 'index')->name('index');
                     Route::get('/{slug}', 'show')->name('show');
+                    Route::delete('/delete/{slug}', 'destroy')->name('destroy');
+
+
 
                     Route::post('/change-status/{slug}', 'changeStatus')->name('changeStatus');
                 });

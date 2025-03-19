@@ -76,6 +76,7 @@
                                         @foreach ($jobs as $chunked)
                                             @foreach ($chunked as $key => $job)
                                                 <tr>
+
                                                     <td><input class="form-cotrol" type="checkbox" name="job_slug[]"
                                                             value="{{ $job->slug }}"></td>
                                                     <td>{{ ++$key }}</td>
@@ -99,6 +100,19 @@
                                                                 value="{{ $job->slug }}"><i
                                                                     class="fa fa-times"></i></button>
                                                         @endif
+{{--                                                        <form action="{{ route('admin.jobRequest.destroy', $job->slug) }}" method="POST" style="display:inline;">--}}
+{{--                                                            @csrf--}}
+{{--                                                            @method('DELETE')--}}
+{{--                                                            <button type="submit" class="btn btn-outline-primary mx-1">--}}
+{{--                                                                <i class="fas fa-trash"></i>--}}
+{{--                                                            </button>--}}
+{{--                                                        </form>--}}
+                                                        <button type="button" class="btn btn-outline-danger mx-1" onclick="confirmDelete('{{ $job->slug }}')">
+                                                            <i class="fas fa-trash"></i>
+                                                        </button>
+
+
+
                                                     </td>
                                                 </tr>
                                             @endforeach
@@ -267,5 +281,48 @@
                 }
             });
         }
+
+        function confirmDelete(jobSlug) {
+            swal({
+                title: "Are you sure?",
+                text: "You will not be able to recover this job!"+jobSlug,
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#dc3545",
+                confirmButtonText: "Yes, delete it!",
+                cancelButtonText: "No, cancel!",
+                closeOnConfirm: false,
+                closeOnCancel: false
+            }, function(isConfirm) {
+                if (isConfirm) {
+                    $.ajax({
+                        url: `/admin/job-requests/delete/${jobSlug}`, // Adjust the route if needed
+                        type: "DELETE", // Since DELETE isn't supported
+                        data: {
+                            _token: "{{ csrf_token() }}",
+                            _method: "DELETE"
+                        },
+                        // success: function(response) {
+                        //     swal("Deleted!", "The job has been deleted.", "success");
+                        //     location.reload(); // Refresh page to update UI
+                        // },
+                        success: function(response) {
+                            // Display a success message using SweetAlert after deletion
+                            swal("Deleted!", "The job has been deleted.", "success")
+                                .then(function() {
+                                    location.reload(); // Refresh page after closing the success alert
+                                });
+                        },
+                        error: function(xhr) {
+                            swal("Error!", "Something went wrong.", "error",xhr);
+                            console.log('error',xhr)
+                        }
+                    });
+                } else {
+                    swal("Cancelled", "Your job is safe :)", "error");
+                }
+            });
+        }
+
     </script>
 @endpush

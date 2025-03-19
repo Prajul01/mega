@@ -48,12 +48,20 @@ class DashboardController extends Controller
             'status' => 'active',
             'job_type' => 1
         ])->count();
+//        $data['newspaperCount'] = Job::where([
+//            'approval' =>'approved',
+//            'status' => 'active',
+//            'newspaper_image' is not null,
+//        ])->count();
+//        $data['newspaperCount'] = Job::where([
+//            'approval' => 'approved',
+//            'status' => 'active',
+//        ])->whereNotNull('newspaper_image')->count();
         $data['newspaperCount'] = Job::where([
-            'type' => 'normal',
-            'approval' =>'approved',
+            'approval' => 'approved',
             'status' => 'active',
-            'job_type' => 2,
-        ])->count();
+        ])->whereNotNull('newspaper_image')->count();
+//        dd($data['newspaperCount']);
 
         $data['unverifiedJobSeekers'] = User::role('job-seeker')->doesnthave('job_seeker')->count();
         $data['verifiedJobSeekers'] = User::role('job-seeker')->has('job_seeker')->count();
@@ -74,7 +82,7 @@ class DashboardController extends Controller
                 ])->with('employer')->latest()->limit(10)->get();
 
         $data['JobIndustries'] = Industry::where('status', 'active')->orderBy('order_no')->with('jobs')->get();
-                
+
         return view('admin.dashboard', $data);
     }
 }

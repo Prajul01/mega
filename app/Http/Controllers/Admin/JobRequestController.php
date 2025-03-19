@@ -76,4 +76,31 @@ class JobRequestController extends Controller
         Mail::to('test@test.com')->send(new JobRequestStatus($details));
         return response()->json($message);
     }
+//    public function destroy($slug)
+//    {
+//        $job = Job::where('slug', $slug)->first();
+//
+//        if (!$job) {
+//            return response()->json(['error' => 'Job not found'], 404);
+//        }
+//
+//        $job->status='active'();
+//        return response()->json(['success' => 'Job has been deleted successfully.'], 200);
+//    }
+    public function destroy($slug)
+    {
+        $job = Job::where('slug', $slug)->first();
+
+        if (!$job) {
+            return response()->json(['error' => 'Job not found'], 404);
+        }
+
+        $job->status = 'deleted';
+        $job->save();
+
+        return response()->json(['success' => 'Job status updated successfully.'], 200);
+    }
+
+
+
 }
