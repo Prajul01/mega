@@ -47,7 +47,7 @@
                     <div class="row">
                         <div class="col-lg-8 ">
                             <div class="section-title bg-white mt-4 contact-form-wrapper mt-lg-0">
-                                <h3 class="title justify-content-center">                            UpComming Evets
+                                <h3 class="title justify-content-center">                            Upcomming Events
                                 </h3>
 {{--                                <div class="container mt-4 bg-gray dropdown-scroll "  >--}}
 {{--                                    <div class="row">--}}
