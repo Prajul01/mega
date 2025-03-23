@@ -30,6 +30,7 @@ Route::
         });
 Route::get('/about', [User\FrontendController::class, 'about'])->name('about');
 Route::get('/contact', [User\FrontendController::class, 'contact'])->name('contact');
+Route::get('/training', [User\FrontendController::class, 'training'])->name('training');
 Route::get('/blogs', [User\FrontendController::class, 'blog'])->name('blog');
 Route::get('/blog/{slug}', [User\FrontendController::class, 'blog_single'])->name('blog_single');
 Route::get('/news-and-announcements', [User\FrontendController::class, 'newsAndAnnouncement'])->name('newsAndAnnouncement');

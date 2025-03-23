@@ -425,12 +425,21 @@
 
                         @can('content-list')
                             <li class="header"><b>Content Management</b></li>
-                             <li class="{{ request()->routeIs('admin.advertisement.*') ? 'active' : '' }}">
+                             <li class="{{ request()->routeIs('admin.training.*') ? 'active' : '' }}">
+                                <a href="{{ route('admin.training.index') }}" data-toggle="tooltip"
+                                    data-placement="right" title="Training">
+                                    <i class="fa fa-image"></i><span>Trainning Management</span>
+                                </a>
+                            </li>
+
+                            <li class="{{ request()->routeIs('admin.advertisement.*') ? 'active' : '' }}">
                                 <a href="{{ route('admin.advertisement.index') }}" data-toggle="tooltip"
-                                    data-placement="right" title="Advertisement">
+                                   data-placement="right" title="Advertisement">
                                     <i class="fa fa-image"></i><span>Advertisement Management</span>
                                 </a>
                             </li>
+
+
                             <li class="{{ request()->routeIs('admin.sliders.*') ? 'active' : '' }}">
                                 <a href="{{ route('admin.sliders.index') }}" data-toggle="tooltip"
                                     data-placement="right" title="Slider">

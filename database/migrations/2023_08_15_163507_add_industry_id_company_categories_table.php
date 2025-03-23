@@ -13,10 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table('company_categories', function (Blueprint $table) {
-                        $table->unsignedBigInteger('industry_id')->nullable()->after('id');
-            $table->foreign('industry_id')->references('id')->on('industries')->onDelete('cascade');
-        });
+//        Schema::table('company_categories', function (Blueprint $table) {
+//                        $table->unsignedBigInteger('industry_id')->nullable()->after('id');
+//            $table->foreign('industry_id')->references('id')->on('industries')->onDelete('cascade');
+//        });
     }
 
     /**
@@ -26,8 +26,8 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::table('company_categories', function (Blueprint $table) {
-            $table->dropColumn('industry_id');
-        });
+//        Schema::table('company_categories', function (Blueprint $table) {
+//            $table->dropColumn('industry_id');
+//        });
     }
 };

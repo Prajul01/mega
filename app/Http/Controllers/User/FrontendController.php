@@ -26,12 +26,15 @@ use App\Models\TenderCategory;
 use App\Models\TenderType;
 use App\Models\Term;
 use App\Models\IssuedReport as Report;
+use App\Models\Trainning;
 use App\Models\User;
 use App\Rules\GoogleRecaptcha;
 use Helper;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 use Storage;
+use Carbon\Carbon;
+
 
 class FrontendController extends Controller
 {
@@ -49,6 +52,7 @@ class FrontendController extends Controller
             'skills' => Skill::with('jobs')->where('status', 'active')->orderBy('order_no')->get(),
             'educations' => Education::where('status', 'active')->with('job')->orderBy('order_no')->get(),
             'industries' => Industry::where('status', 'active')->orderBy('order_no')->with(['jobs', 'employers.jobs'])->get(),
+            'training'=>Trainning::all(),
         ];
 
         return view('user.index', $data);
@@ -242,6 +246,18 @@ class FrontendController extends Controller
     {
         return view('user.contact');
     }
+//    public function training()
+//    {
+//        $training=Trainning::all();
+//        return view('user.training',compact('training'));
+//    }
+
+    public function training()
+    {
+        $training = Trainning::where('date', '>=', Carbon::today())->get();
+        return view('user.training', compact('training'));
+    }
+
 
     public function contact_store(Request $request)
     {

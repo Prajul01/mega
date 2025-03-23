@@ -125,6 +125,19 @@
                     <li class="nav-item">
                         <a href="{{ route('contact') }}" class="nav-link">Contact</a>
                     </li>
+
+                    <li class="nav-item dropdown dropdown-hover new-dropdown position-relative">
+                        <a class="nav-link" href="javascript:void(0)" id="jobsdropdown" role="button"
+                           data-bs-toggle="dropdown">
+                            Training <div class="arrow-down"></div>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-center" aria-labelledby="jobsdropdown">
+                            <li><a class="dropdown-item" href="{{ route('training') }}">Event Calender</a>
+
+                            <li><a class="dropdown-item" href="{{ route('training') }}">Events</a>
+                            </li>
+                        </ul>
+                    </li>
                 </ul>
                 <!--end navbar-nav-->
             </div>

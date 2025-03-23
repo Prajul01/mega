@@ -477,5 +477,18 @@ Route::
                     Route::post('/delete', 'AdvertisementController@destroy')->name('destroy');
                     Route::post('/order_no', 'AdvertisementController@set_order')->name('order');
                 });
+
+
+
+                Route::name('training.')
+                    ->prefix('training-management')
+                    ->group(function () {
+                        Route::get('/', 'TrainningController@index')->name('index');
+                        Route::get('/edit/{id}', 'TrainningController@edit')->name('edit');
+                        Route::post('/store', 'TrainningController@store')->name('store');
+                        Route::post('/update/{id}', 'TrainningController@update')->name('update');
+                        Route::post('/delete', 'TrainningController@destroy')->name('destroy');
+//                        Route::post('/order_no', 'AdvertisementController@set_order')->name('order');
+                    });
             });
         });
