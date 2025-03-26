@@ -20,7 +20,7 @@ class TrainningController extends Controller
 
     public function store(Request $request)
     {
-        $data=Trainning::createOrUpdate([
+        $data=Trainning::create([
             'name'=>$request->name,
             'description'=>$request->description,
             'date'=>$request->date,

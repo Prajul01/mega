@@ -49,21 +49,6 @@
                             <div class="section-title bg-white mt-4 contact-form-wrapper mt-lg-0">
                                 <h3 class="title justify-content-center">                            Upcomming Events
                                 </h3>
-{{--                                <div class="container mt-4 bg-gray dropdown-scroll "  >--}}
-{{--                                    <div class="row">--}}
-{{--                                        @foreach($training as $events)--}}
-{{--                                            <div class="col-md-16 mt-4">--}}
-{{--                                                <div class="card mb-3 shadow-sm">--}}
-{{--                                                    <div class="card-body">--}}
-{{--                                                        <h5 class="card-title">{{ $events->name }}</h5>--}}
-{{--                                                        <p class="card-text">{{ $events->description }}</p>--}}
-{{--                                                        <p class="card-text"><small class="text-muted">{{ $events->date }}</small></p>--}}
-{{--                                                    </div>--}}
-{{--                                                </div>--}}
-{{--                                            </div>--}}
-{{--                                        @endforeach--}}
-{{--                                    </div>--}}
-{{--                                </div>--}}
                                 <div class="container mt-4 bg-gray dropdown-scroll" style="max-height: 500px; overflow-y: auto;">
                                     <div class="row">
                                         @foreach($training as $events)
@@ -73,7 +58,14 @@
                                                         <h5 class="card-title">{{ $events->name }}</h5>
                                                         <p class="card-text">{{ $events->description }}</p>
                                                         <p class="card-text"><small class="text-muted">{{ $events->date }}</small></p>
+                                                        <button class="btn btn-primary enroll-btn" data-bs-toggle="modal" data-bs-target="#eventModal"
+                                                                data-eventid="{{ $events->id }}"
+                                                                data-eventname="{{ $events->name }}">
+                                                            Enroll
+                                                        </button>
+
                                                     </div>
+
                                                 </div>
                                             </div>
                                         @endforeach
@@ -82,78 +74,9 @@
 
 
                             </div>
-{{--                                <p class="text-muted">Start working with Jobcy that can provide everything you need--}}
-{{--                                    to generate--}}
-{{--                                    awareness, drive traffic, connect.</p>--}}
-{{--                                <form method="post" class="contact-form mt-4" name="myForm" id="myForm"--}}
-{{--                                    action="{{ route('contact.store') }}">--}}
-{{--                                    @csrf--}}
-{{--                                    <div class="row">--}}
-{{--                                        <div class="col-lg-6">--}}
-{{--                                            <div class="mb-3">--}}
-{{--                                                <label for="nameInput" class="form-label">Full Name</label>--}}
-{{--                                                <input type="text" name="full_name" id="name"--}}
-{{--                                                    value="{{ old('full_name') }}" class="form-control"--}}
-{{--                                                    placeholder="Enter your full name">--}}
-{{--                                                @error('full_name')--}}
-{{--                                                    <span class="text-danger">{{ $message }}</span>--}}
-{{--                                                @enderror--}}
-{{--                                            </div>--}}
-{{--                                        </div><!--end col-->--}}
-{{--                                        <div class="col-lg-6">--}}
-{{--                                            <div class="mb-3">--}}
-{{--                                                <label for="nameInput" class="form-label">Phone Number</label>--}}
-{{--                                                <input type="text" name="phone_number" value="{{ old('phone_number') }}"--}}
-{{--                                                    id="name" class="form-control" placeholder="Enter your Number">--}}
-{{--                                                @error('phone_number')--}}
-{{--                                                    <span class="text-danger">{{ $message }}</span>--}}
-{{--                                                @enderror--}}
-{{--                                            </div>--}}
-{{--                                        </div><!--end col-->--}}
-{{--                                        <div class="col-md-6">--}}
-{{--                                            <div class="mb-3">--}}
-{{--                                                <label for="emailInput" class="form-label">Email</label>--}}
-{{--                                                <input type="email" class="form-control" id="email" name="email"--}}
-{{--                                                    placeholder="Enter your email" value="{{ old('email') }}">--}}
-{{--                                                @error('email')--}}
-{{--                                                    <span class="text-danger">{{ $message }}</span>--}}
-{{--                                                @enderror--}}
-{{--                                            </div>--}}
-{{--                                        </div><!--end col-->--}}
-{{--                                        <div class="col-md-6">--}}
-{{--                                            <div class="mb-3">--}}
-{{--                                                <label for="subjectInput" class="form-label">Subject</label>--}}
-{{--                                                <input type="text" class="form-control" id="subjectInput" name="subject"--}}
-{{--                                                    id="subject" value="{{ old('subject') }}"--}}
-{{--                                                    placeholder="Enter your subject">--}}
-{{--                                                @error('subject')--}}
-{{--                                                    <span class="text-danger">{{ $message }}</span>--}}
-{{--                                                @enderror--}}
-{{--                                            </div>--}}
-{{--                                        </div><!--end col-->--}}
-{{--                                        <div class="col-lg-12">--}}
-{{--                                            <div class="mb-3">--}}
-{{--                                                <label for="meassageInput" class="form-label">Your Message</label>--}}
-{{--                                                <textarea class="form-control" id="meassageInput" placeholder="Enter your message" name="message" id="comments"--}}
-{{--                                                    rows="5">{{ old('message') }}</textarea>--}}
-{{--                                                @error('message')--}}
-{{--                                                    <span class="text-danger">{{ $message }}</span>--}}
-{{--                                                @enderror--}}
-{{--                                            </div>--}}
-{{--                                        </div><!--end col-->--}}
-{{--                                    </div><!--end row-->--}}
-{{--                                    @if (config('services.recaptcha.site_key'))--}}
-{{--                                        <div class="g-recaptcha mb-2"--}}
-{{--                                            data-sitekey="{{ config('services.recaptcha.site_key') }}">--}}
-{{--                                        </div>--}}
-{{--                                    @endif--}}
-{{--                                    <div class="text-left">--}}
-{{--                                        <button type="submit" id="submit" class="btn btn-primary">--}}
-{{--                                            Send Message <i class="uil uil-message ms-1"></i></button>--}}
-{{--                                    </div>--}}
-{{--                                </form><!--end form-->--}}
-{{--                            </div>--}}
-                        </div><!--end col-->
+                        </div>
+                        <!-- Modal -->
+
                         <div class="col-lg-4">
                             <div class="contact-info">
                                 <div class="contact-info-heading">
@@ -165,6 +88,37 @@
                             </div>
                         </div>
                     </div>
+
+                    <div class="modal fade" id="eventModal" aria-labelledby="modalLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered"> <!-- Added modal-dialog-centered -->
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="modalLabel">Register for Event</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <form method="POST" action="{{ route('enrollTraining') }}" enctype="multipart/form-data"  id="eventForm">
+                                        @csrf
+                                        <div class="mb-3">
+                                            <label for="name" class="form-label">Your Name</label>
+                                            <input type="text" class="form-control" id="name" name="name" required>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="name" class="form-label">Email</label>
+                                            <input type="email" class="form-control" id="email" name="email" required>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="name" class="form-label">Mobile</label>
+                                            <input type="number" class="form-control" id="mobile" name="mobile" required>
+                                        </div>
+                                        <input type="hidden" id="event_id" name="event_id">
+                                        <button type="submit" class="btn btn-success">Submit</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
             </section>
         </div>
@@ -226,6 +180,23 @@
             });
 
             calendar.render();
+        });
+
+        document.addEventListener("DOMContentLoaded", function () {
+            // Select all enroll buttons
+            const enrollButtons = document.querySelectorAll(".enroll-btn");
+
+
+            enrollButtons.forEach(button => {
+                button.addEventListener("click", function () {
+                    // Get event ID from the clicked button
+                    let eventId = this.getAttribute("data-eventid");
+                    console.log('eventId',eventId)
+
+                    // Set the event ID in the hidden input field of the form
+                    document.getElementById("event_id").value = eventId;
+                });
+            });
         });
     </script>
 @endpush

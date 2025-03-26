@@ -428,7 +428,13 @@
                              <li class="{{ request()->routeIs('admin.training.*') ? 'active' : '' }}">
                                 <a href="{{ route('admin.training.index') }}" data-toggle="tooltip"
                                     data-placement="right" title="Training">
-                                    <i class="fa fa-image"></i><span>Trainning Management</span>
+                                    <i class="fa fa-image"></i><span>Training Management</span>
+                                </a>
+                            </li>
+                            <li class="{{ request()->routeIs('admin.trainingenroll.*') ? 'active' : '' }}">
+                                <a href="{{ route('admin.trainingenroll.index') }}" data-toggle="tooltip"
+                                   data-placement="right" title="TrainingEnroll">
+                                    <i class="fa fa-image"></i><span>Training Enroll Management</span>
                                 </a>
                             </li>
 

@@ -12,6 +12,7 @@ use App\Models\CompanyCategory;
 use App\Models\Contact;
 use App\Models\Education;
 use App\Models\Employer;
+use App\Models\EventEnroll;
 use App\Models\Experience;
 use App\Models\Faq;
 use App\Models\Industry;
@@ -256,6 +257,28 @@ class FrontendController extends Controller
     {
         $training = Trainning::where('date', '>=', Carbon::today())->get();
         return view('user.training', compact('training'));
+    }
+
+    public function enroll_training(Request $request)
+    {
+        $evenntEnroll=EventEnroll::create([
+            "name" => $request->name,
+  "email" => $request->email,
+  "mobile" => $request->mobile,
+  "event_id" => $request->event_id
+]);
+        if (isset($evenntEnroll)) {
+            return redirect()
+                ->back()
+                ->with('status', 'Enrolled Successfully!');
+        } else {
+            return redirect()
+                ->back()
+                ->with('error', 'Something went Wrong!');
+        }
+
+        dd('$id',$evenntEnroll);
+
     }
 
 
