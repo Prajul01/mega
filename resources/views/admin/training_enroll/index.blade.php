@@ -30,16 +30,16 @@
                                     <i class="icon-arrow-left"></i>&nbsp;Go back</a>
                             </li>
 
-                        @else
-                            <li class="nav-item">
-                                <a class="nav-link show active" data-toggle="tab" href="#training">
-                                    <i class="fa fa-list"></i> All training
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" data-toggle="tab" href="#addad">
-                                    <i class="fa fa-plus"></i> Add training</a>
-                            <li>
+{{--                        @else--}}
+{{--                            <li class="nav-item">--}}
+{{--                                <a class="nav-link show active" data-toggle="tab" href="#training">--}}
+{{--                                    <i class="fa fa-list"></i> All training--}}
+{{--                                </a>--}}
+{{--                            </li>--}}
+{{--                            <li class="nav-item">--}}
+{{--                                <a class="nav-link" data-toggle="tab" href="#addad">--}}
+{{--                                    <i class="fa fa-plus"></i> Add training</a>--}}
+{{--                            <li>--}}
 
                         @endif
                     </ul>
