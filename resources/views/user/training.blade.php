@@ -5,7 +5,6 @@
 @section('content')
     <div class="main-content">
         <div class="page-content">
-            <!-- Banner Section -->
             <section class="bg-home inner-page" id="home">
                 <div class="bg-overlay" style="background-image: url('{{ asset('frontend/assets/images/files/banner1.jpg') }}');"></div>
                 <div class="container">
@@ -20,11 +19,9 @@
                 </div>
             </section>
 
-            <!-- Main Content Section -->
             <section class="home-jobs-wrapper bg-gray">
                 <div class="container-fluid custom-container">
                     <div class="row">
-                        <!-- Events List -->
                         <div class="col-lg-8 col-12 order-1 order-lg-0">
                             <div class="section-title bg-white mt-4 contact-form-wrapper mt-lg-0">
                                 <h3 class="title text-center">Upcoming Events</h3>
@@ -51,18 +48,16 @@
                             </div>
                         </div>
 
-                        <!-- Calendar Section -->
-                        <div class="col-lg-4 col-12 ">
-                            <div class=" bg-white p-3 rounded shadow-sm">
+                        <div class="col-lg-4 col-12">
+                            <div class="bg-white p-3 rounded shadow-sm mt-4 mt-lg-0">
                                 <h4 class="text-center mb-3">Event Calendar</h4>
-                                <div class="">
+                                <div class="calendar-container">
                                     <div id="calendar"></div>
                                 </div>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Enrollment Modal -->
                     <div class="modal fade" id="eventModal" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true">
                         <div class="modal-dialog modal-dialog-centered">
                             <div class="modal-content">
@@ -99,96 +94,176 @@
 @endsection
 
 @push('style')
-
+    <link href='https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.min.css' rel='stylesheet'>
     <style>
-        #calendar-wrapper {
+        /* Calendar Container */
+        .calendar-container {
             width: 100%;
-            min-height: 400px; /* Prevents calendar collapse */
+            overflow-x: auto;
         }
+
         #calendar {
-            min-width: 100%;
-            min-height: 400px;
+            width: 100%;
+            min-height: 300px;
         }
-        @media (max-width: 700px) {
-            .fc-toolbar {
+
+        /* Calendar Header */
+        .fc-header-toolbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            margin-bottom: 10px !important;
+        }
+
+        @media (max-width: 699px) {
+            .fc-header-toolbar {
                 flex-direction: column;
+                gap: 10px;
             }
         }
 
+        /* Calendar Title */
+        .fc-toolbar-title {
+            font-size: 1.2rem;
+            white-space: normal;
+            text-align: center;
+        }
 
+        /* Day headers (Sun, Mon, etc.) */
+        .fc-col-header-cell {
+            padding: 2px !important;
+        }
+        .fc-col-header-cell-cushion {
+            font-size: 0.8rem;
+            padding: 2px !important;
+            white-space: normal;
+            line-height: 1.2;
+        }
+
+        /* Date cells */
+        .fc-daygrid-day {
+            min-height: 50px !important;
+        }
+        .fc-daygrid-day-number {
+            font-size: 0.9rem;
+            padding: 2px !important;
+        }
+
+        /* Today button */
+        .fc-today-button {
+            padding: 0.25rem 0.5rem;
+            font-size: 0.8rem;
+        }
+
+        /* Navigation buttons */
+        .fc-prev-button, .fc-next-button {
+            padding: 0.25rem 0.5rem;
+            font-size: 0.8rem;
+        }
+
+        /* Tooltip styling */
+        .event-tooltip {
+            position: fixed;
+            background: white;
+            padding: 8px;
+            border-radius: 4px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            z-index: 9999;
+            max-width: 200px;
+            font-size: 0.9rem;
+        }
+
+        /* Make sure the calendar displays on all screen sizes */
+        @media (max-width: 699px) {
+            .fc-daygrid-day-number {
+                font-size: 0.8rem;
+                padding: 1px !important;
+            }
+
+            .fc-col-header-cell-cushion {
+                font-size: 0.7rem;
+            }
+
+            .fc-toolbar-title {
+                font-size: 1rem;
+            }
+        }
+         .event-tooltip {
+             position: absolute;
+             background: rgba(0, 0, 0, 0.8);
+             color: white;
+             padding: 5px 10px;
+             border-radius: 5px;
+             font-size: 14px;
+             pointer-events: none;
+             z-index: 1000;
+         }
+
+        /* Hide "all-day" label in listMonth view */
+        .fc-list-event-time {
+            display: none !important;
+        }
     </style>
-
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.2.7/fullcalendar.min.css"/>
 
 @endpush
 
+
 @push('script')
+
     <script src='https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.min.js'></script>
+
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            // Initialize calendar
             const calendarEl = document.getElementById('calendar');
-            const isMobile = window.matchMedia('(max-width: 767.98px)').matches;
+
+            if (!calendarEl) {
+                console.error("Calendar element not found!");
+                return;
+            }
 
             const calendar = new FullCalendar.Calendar(calendarEl, {
-                initialView: 'dayGridMonth',
+                initialView: window.innerWidth < 700 ? 'listMonth' : 'dayGridMonth',
                 headerToolbar: {
-                    left: 'prev',
+                    left: '',
                     center: 'title',
-                    right: 'next'
-                },
-                footerToolbar: {
-                    center: 'today'
-                },
-                views: {
-                    dayGridMonth: {
-                        titleFormat: { year: 'numeric', month: 'short' },
-
-                        dayMaxEvents: true
-                    }
+                    right: ''
                 },
                 events: [
                         @foreach ($training as $event)
                     {
-                        title: "{{ $event->name }}",
+                        title: "{{ $event->name }}",  // Always show event name
                         start: "{{ $event->date }}",
-                        description: "{{ $event->description }}",
                         backgroundColor: '#dc3545',
                         textColor: 'white',
-                        display: 'background'
+                        display: window.innerWidth < 700 ? 'block' : 'background' // Hide "all-day" on small screens
                     },
                     @endforeach
                 ],
                 height: 'auto',
                 fixedWeekCount: false,
-                showNonCurrentDates: true, // Changed to true to ensure all dates show
-                dayCellContent: function(arg) {
-                    // Custom day cell content to ensure dates are visible
-                    return { html: '<div class="fc-daygrid-day-number">' + arg.dayNumberText + '</div>' };
-                },
+                showNonCurrentDates: true,
+                contentHeight: 'auto',
                 eventMouseEnter: function(info) {
                     const tooltip = document.createElement('div');
                     tooltip.className = 'event-tooltip';
-                    tooltip.innerHTML = `
-                    <strong>${info.event.title}</strong><br>
-                    <small>${info.event.start.toLocaleDateString()}</small><br>
-                    <p>${info.event.extendedProps.description || 'No description available'}</p>
-                `;
-
+                    tooltip.innerHTML = `<strong>${info.event.title}</strong><br>`;
                     document.body.appendChild(tooltip);
 
-                    const updatePosition = function() {
-                        const x = info.jsEvent.clientX + 10;
-                        const y = info.jsEvent.clientY + 10;
-                        tooltip.style.transform = `translate(${x}px, ${y}px)`;
+                    const updatePosition = function(e) {
+                        tooltip.style.left = e.pageX + 10 + 'px';
+                        tooltip.style.top = e.pageY + 10 + 'px';
                     };
-
-                    updatePosition();
+                    updatePosition(info.jsEvent);
                     info.el.addEventListener('mousemove', updatePosition);
-
                     info.el.tooltip = {
                         element: tooltip,
                         updatePosition: updatePosition
                     };
+
+                    // Show event title only on hover
+
                 },
                 eventMouseLeave: function(info) {
                     if (info.el.tooltip) {
@@ -196,19 +271,22 @@
                         info.el.tooltip.element.remove();
                         delete info.el.tooltip;
                     }
+                    info.el.innerHTML = '';
                 },
+                windowResize: function() {
+                    const newView = window.innerWidth < 700 ? 'listMonth' : 'dayGridMonth';
+                    calendar.changeView(newView);
+                    calendar.getEvents().forEach(event => {
+                        event.setProp('display', newView === 'listMonth' ? 'block' : 'background');
+                    });
+                    calendar.updateSize();
+                }
             });
 
             calendar.render();
-            // Enroll button functionality
-            document.querySelectorAll('.enroll-btn').forEach(button => {
-                button.addEventListener('click', function() {
-                    document.getElementById('event_id').value = this.dataset.eventid;
-                });
-            });
         });
-
-
     </script>
-@endpush
 
+
+
+@endpush
