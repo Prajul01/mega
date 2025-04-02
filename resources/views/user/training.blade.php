@@ -293,75 +293,133 @@
 {{--@endpush--}}
 
 @push('script')
-    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.min.js"></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const calendarEl = document.getElementById('calendar');
+{{--    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.min.js"></script>--}}
+{{--    <script>--}}
+{{--        document.addEventListener('DOMContentLoaded', function() {--}}
+{{--            const calendarEl = document.getElementById('calendar');--}}
 
-            if (!calendarEl) {
-                console.error("Calendar element not found!");
-                return;
+{{--            if (!calendarEl) {--}}
+{{--                console.error("Calendar element not found!");--}}
+{{--                return;--}}
+{{--            }--}}
+
+{{--            const calendar = new FullCalendar.Calendar(calendarEl, {--}}
+{{--                initialView: window.innerWidth < 700 ? 'listMonth' : 'dayGridMonth',--}}
+{{--                headerToolbar: {--}}
+{{--                    left: 'prev,next today',--}}
+{{--                    center: 'title',--}}
+{{--                    right: window.innerWidth < 700 ? 'listMonth' : 'dayGridMonth'--}}
+{{--                },--}}
+{{--                events: [--}}
+{{--                        @foreach ($training as $event)--}}
+{{--                    {--}}
+{{--                        title: "{{ $event->name }}",--}}
+{{--                        start: "{{ $event->date }}",--}}
+{{--                        backgroundColor: '#dc3545',--}}
+{{--                        textColor: 'white',--}}
+{{--                        display: window.innerWidth < 700 ? 'block' : 'background', // Hide title by default--}}
+{{--                    },--}}
+{{--                    @endforeach--}}
+{{--                ],--}}
+{{--                height: 'auto',--}}
+{{--                fixedWeekCount: false,--}}
+{{--                showNonCurrentDates: true,--}}
+{{--                contentHeight: 'auto',--}}
+{{--                eventMouseEnter: function(info) {--}}
+{{--                    const tooltip = document.createElement('div');--}}
+{{--                    tooltip.className = 'event-tooltip';--}}
+{{--                    tooltip.innerHTML = `<strong>${info.event.title}</strong>`;--}}
+{{--                    document.body.appendChild(tooltip);--}}
+
+{{--                    const updatePosition = function(e) {--}}
+{{--                        tooltip.style.left = e.pageX + 50 + 'px';--}}
+{{--                        tooltip.style.top = e.pageY + 10 + 'px';--}}
+{{--                    };--}}
+
+{{--                    updatePosition(info.jsEvent);--}}
+{{--                    info.el.addEventListener('mousemove', updatePosition);--}}
+{{--                    info.el.tooltip = { element: tooltip, updatePosition: updatePosition };--}}
+{{--                },--}}
+{{--                eventMouseLeave: function(info) {--}}
+{{--                    if (info.el.tooltip) {--}}
+{{--                        info.el.removeEventListener('mousemove', info.el.tooltip.updatePosition);--}}
+{{--                        info.el.tooltip.element.remove();--}}
+{{--                        delete info.el.tooltip;--}}
+{{--                    }--}}
+{{--                },--}}
+{{--                windowResize: function() {--}}
+{{--                    const newView = window.innerWidth < 700 ? 'listMonth' : 'dayGridMonth';--}}
+{{--                    calendar.changeView(newView);--}}
+{{--                    calendar.updateSize();--}}
+{{--                }--}}
+{{--            });--}}
+
+{{--            calendar.render();--}}
+{{--        });--}}
+{{--    </script>--}}
+
+<script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.min.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const calendarEl = document.getElementById('calendar');
+
+        if (!calendarEl) {
+            console.error("Calendar element not found!");
+            return;
+        }
+
+        const calendar = new FullCalendar.Calendar(calendarEl, {
+            initialView: window.innerWidth < 700 ? 'listMonth' : 'dayGridMonth',
+            headerToolbar: {
+                left: 'prev,next today',
+                center: 'title',
+                right: window.innerWidth < 700 ? 'listMonth' : 'dayGridMonth'
+            },
+            events: [
+                    @foreach ($training as $event)
+                {
+                    title: "{{ $event->name }}",
+                    start: "{{ $event->date }}",
+                    backgroundColor: '#dc3545',
+                    textColor: 'black',
+                    display: window.innerWidth < 700 ? 'block' : 'background', // Hide title by default
+                },
+                @endforeach
+            ],
+            height: 'auto',
+            fixedWeekCount: false,
+            showNonCurrentDates: true,
+            contentHeight: 'auto',
+            eventContent: function(arg) {
+                // Only show the event title (hide 'all-day' and red dot)
+                return { html: `<div class="custom-event-title text-black">${arg.event.title}</div>` };
+            },
+            windowResize: function() {
+                const newView = window.innerWidth < 700 ? 'listMonth' : 'dayGridMonth';
+                calendar.changeView(newView);
+                calendar.updateSize();
             }
-
-            const calendar = new FullCalendar.Calendar(calendarEl, {
-                initialView: window.innerWidth < 700 ? 'listMonth' : 'dayGridMonth',
-                headerToolbar: {
-                    left: 'prev,next today',
-                    center: 'title',
-                    right: window.innerWidth < 700 ? 'listMonth' : 'dayGridMonth'
-                },
-                events: [
-                        @foreach ($training as $event)
-                    {
-                        title: "{{ $event->name }}",
-                        start: "{{ $event->date }}",
-                        backgroundColor: '#dc3545',
-                        textColor: 'white',
-                        display: window.innerWidth < 700 ? 'block' : 'background', // Hide title by default--}}
-                    },
-                    @endforeach
-                ],
-                height: 'auto',
-                fixedWeekCount: false,
-                showNonCurrentDates: true,
-                contentHeight: 'auto',
-                eventMouseEnter: function(info) {
-                    const tooltip = document.createElement('div');
-                    tooltip.className = 'event-tooltip';
-                    tooltip.innerHTML = `<strong>${info.event.title}</strong>`;
-                    document.body.appendChild(tooltip);
-
-                    const updatePosition = function(e) {
-                        tooltip.style.left = e.pageX + 50 + 'px';
-                        tooltip.style.top = e.pageY + 10 + 'px';
-                    };
-
-                    updatePosition(info.jsEvent);
-                    info.el.addEventListener('mousemove', updatePosition);
-                    info.el.tooltip = { element: tooltip, updatePosition: updatePosition };
-                },
-                eventMouseLeave: function(info) {
-                    if (info.el.tooltip) {
-                        info.el.removeEventListener('mousemove', info.el.tooltip.updatePosition);
-                        info.el.tooltip.element.remove();
-                        delete info.el.tooltip;
-                    }
-                },
-                windowResize: function() {
-                    const newView = window.innerWidth < 700 ? 'listMonth' : 'dayGridMonth';
-                    calendar.changeView(newView);
-                    calendar.updateSize();
-                }
-            });
-
-            calendar.render();
         });
-    </script>
+
+        calendar.render();
+    });
+</script>
+
 
 @endpush
 
 @push('style')
     <style>
+        .fc-list-event-dot,  /* Hides red dot */
+        .fc-list-event-time { /* Hides 'all-day' text */
+            display: none !important;
+        }
+
+        .custom-event-title {
+            font-size: 16px;
+            font-weight: bold;
+        }
+
         /* Navigation buttons styling */
         .fc-prev-button, .fc-next-button, .fc-today-button {
             padding: 5px 10px;
