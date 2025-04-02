@@ -10,7 +10,7 @@ class TrainningEnrollController extends Controller
 {
     public function index()
     {
-        $trainingEnroll = EventEnroll::all();
+        $trainingEnroll = EventEnroll::with('events')->get();
         $status = 'index';
         return view('admin.training_enroll.index', compact('trainingEnroll', 'status'));
     }

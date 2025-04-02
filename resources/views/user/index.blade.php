@@ -29,192 +29,6 @@
 
 
 
-        <section class="job-categories landing-negative">
-            <div class="container">
-                <ul class="job-list-menu nav nav-pills nav-justified flex-column flex-sm-row mb-4" id="pills-tab"
-                    role="tablist">
-                    <li class="nav-item" role="presentation">
-                        <button class="nav-link active" id="industry-job-tab" data-bs-toggle="pill"
-                            data-bs-target="#industry-job" type="button" role="tab" aria-controls="industry-job"
-                            aria-selected="true">Industry</button>
-                    </li>
-                    <li class="nav-item" role="presentation">
-                        <button class="nav-link" id="company-job-tab" data-bs-toggle="pill" data-bs-target="#company-job"
-                            type="button" role="tab" aria-controls="company-job" aria-selected="false">Company</button>
-                    </li>
-                    <li class="nav-item" role="presentation">
-                        <button class="nav-link" id="skill-job-tab" data-bs-toggle="pill" data-bs-target="#skill-job"
-                            type="button" role="tab" aria-controls="skill-job" aria-selected="false">Department
-                        </button>
-                    </li>
-                    <li class="nav-item" role="presentation">
-                        <button class="nav-link" id="location-job-tab" data-bs-toggle="pill" data-bs-target="#location-job"
-                            type="button" role="tab" aria-controls="location-job" aria-selected="false">Location
-                        </button>
-                    </li>
-
-                </ul>
-            </div>
-        </section>
-
-
-
-        <section class="job-categories landing-negative no-negative bg-gray">
-            <div class="container">
-                <div class="tab-content" id="pills-tabContent">
-                    <div class="tab-pane fade show active" id="industry-job" role="tabpanel"
-                        aria-labelledby="industry-job-tab">
-                        <br>
-                        <div class="row">
-                            <?php
-                            $industry = $industries
-                                ->sortByDesc(function ($industryChunk) {
-                                    return $industryChunk->jobs->count();
-                                })
-                                ->chunk(1);
-                            ?>
-                            @foreach ($industry as $key => $industryChunk)
-                                <div class="col-lg-4 col-md-6 {{ $key > 4 ? 'mobile-none' : '' }}">
-                                    <div class="card job-Categories-box bg-light border-0">
-                                        <div class="card-body px-3 py-2">
-                                            <ul class="list-unstyled job-Categories-list mb-0">
-                                                @foreach ($industryChunk as $industry)
-                                                    <li>
-                                                        <a href="{{ route('jobs', ['industry' => $industry->slug]) }}"
-                                                            class="primary-link">{{ $industry->name }}
-
-                                                            <span
-                                                                class="badge bg-soft-info float-end">{{ $industry->jobs->count() }}</span></a>
-                                                    </li>
-                                                @endforeach
-
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-                            @endforeach
-                            @if ($industry->count() > 5)
-                                <div class="mobile-see-more">
-                                    <span class="click-show">See</span> <span class="click-remove d-none">Remove</span>
-                                    More Industry ({{ $industry->count() }})
-                                    <span class="top-icon">
-                                        <i class="fa-solid fa-angle-down"></i>
-                                    </span>
-                                </div>
-                            @endif
-
-                        </div>
-                    </div>
-                    <div class="tab-pane fade" id="company-job" role="tabpanel" aria-labelledby="company-job-tab">
-                        <br>
-                        <div class="row">
-                            @foreach ($employers->chunk(1) as $key => $employersChunk)
-                                <div class="col-lg-4 col-md-6 {{ $key > 4 ? 'mobile-none' : '' }}">
-                                    <div class="card job-Categories-box bg-light border-0">
-                                        <div class="card-body px-3 py-2">
-
-                                            <ul class="list-unstyled job-Categories-list mb-0">
-                                                @foreach ($employersChunk as $employer)
-                                                    <li>
-                                                        <a href="{{ route('jobs', ['company' => $employer->slug]) }}"
-                                                            class="primary-link">{{ $employer->company_name }}<span
-                                                                class="badge bg-soft-info float-end">{{ $employer->jobs->count() }}</span></a>
-                                                    </li>
-                                                @endforeach
-
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-                            @endforeach
-                            @if ($employer->count() > 5)
-                                <div class="mobile-see-more">
-                                    <span class="click-show">See</span> <span class="click-remove d-none">Remove</span>
-                                    More Industry ({{ $employer->count() }})
-                                    <span class="top-icon">
-                                        <i class="fa-solid fa-angle-down"></i>
-                                    </span>
-                                </div>
-                            @endif
-                        </div>
-                    </div>
-                    <!--end freelancer-tab-->
-                    <div class="tab-pane fade" id="location-job" role="tabpanel" aria-labelledby="location-job-tab">
-                        <br>
-                        <div class="row">
-
-                            @foreach ($locations->chunk(1) as $key => $locationChunk)
-                                <div class="col-lg-4 col-md-6 {{ $key > 4 ? 'mobile-none' : '' }}">
-                                    <div class="card job-Categories-box bg-light border-0">
-                                        <div class="card-body px-3 py-2">
-                                            <ul class="list-unstyled job-Categories-list mb-0">
-                                                @foreach ($locationChunk as $location)
-                                                    <li>
-                                                        <a href="{{ route('jobs', ['location' => $location->slug]) }}"
-                                                            class="primary-link">{{ $location->name }}
-                                                            <span
-                                                                class="badge bg-soft-info float-end">{{ $location->jobs->count() }}</span></a>
-                                                    </li>
-                                                @endforeach
-
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-                            @endforeach
-                            @if ($locations->count() > 5)
-                                <div class="mobile-see-more">
-                                    <span class="click-show">See</span> <span class="click-remove d-none">Remove</span>
-                                    More Industry ({{ $locations->count() }})
-                                    <span class="top-icon">
-                                        <i class="fa-solid fa-angle-down"></i>
-                                    </span>
-                                </div>
-                            @endif
-
-                            <!--end col-->
-                        </div>
-                    </div>
-                    <div class="tab-pane fade" id="skill-job" role="tabpanel" aria-labelledby="skill-job-tab">
-                        <br>
-                        <div class="row">
-                            @foreach ($categories->chunk(1) as $key => $categoryChunk)
-                                <div class="col-lg-4 col-md-6 {{ $key > 4 ? 'mobile-none' : '' }}">
-                                    <div class="card job-Categories-box bg-light border-0">
-                                        <div class="card-body px-3 py-2">
-                                            <ul class="list-unstyled job-Categories-list mb-0">
-                                                @foreach ($categoryChunk as $category)
-                                                    <li>
-                                                        <a href="{{ route('jobs', ['category' => $category->slug]) }}"
-                                                            class="primary-link">{{ $category->title }}
-                                                            <span
-                                                                class="badge bg-soft-info float-end">{{ $category->jobs->count() }}</span></a>
-                                                    </li>
-                                                @endforeach
-
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-                            @endforeach
-                            @if ($categories->count() > 5)
-                                <div class="mobile-see-more">
-                                    <span class="click-show">See</span> <span class="click-remove d-none">Remove</span>
-                                    More Industry ({{ $categories->count() }})
-                                    <span class="top-icon">
-                                        <i class="fa-solid fa-angle-down"></i>
-                                    </span>
-                                </div>
-                            @endif
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-        </section>
-
-
-
         <section class="home-jobs-wrapper bg-light">
             <div class="container-fluid custom-container">
                 <div class="row">
@@ -801,6 +615,192 @@
 
 
 
+ <div class="mt-4"></div>
+
+        <section class="job-categories landing-negative">
+            <div class="container-fluid">
+                <ul class="job-list-menu nav nav-pills nav-justified flex-column flex-sm-row mb-4" id="pills-tab"
+                    role="tablist">
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link active" id="industry-job-tab" data-bs-toggle="pill"
+                                data-bs-target="#industry-job" type="button" role="tab" aria-controls="industry-job"
+                                aria-selected="true">Industry</button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="company-job-tab" data-bs-toggle="pill" data-bs-target="#company-job"
+                                type="button" role="tab" aria-controls="company-job" aria-selected="false">Company</button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="skill-job-tab" data-bs-toggle="pill" data-bs-target="#skill-job"
+                                type="button" role="tab" aria-controls="skill-job" aria-selected="false">Department
+                        </button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="location-job-tab" data-bs-toggle="pill" data-bs-target="#location-job"
+                                type="button" role="tab" aria-controls="location-job" aria-selected="false">Location
+                        </button>
+                    </li>
+
+                </ul>
+            </div>
+        </section>
+
+
+
+        <section class="job-categories landing-negative no-negative bg-gray">
+            <div class="container-fluid">
+                <div class="tab-content" id="pills-tabContent">
+                    <div class="tab-pane fade show active" id="industry-job" role="tabpanel"
+                         aria-labelledby="industry-job-tab">
+                        <br>
+                        <div class="row">
+                            <?php
+                            $industry = $industries
+                                ->sortByDesc(function ($industryChunk) {
+                                    return $industryChunk->jobs->count();
+                                })
+                                ->chunk(1);
+                            ?>
+                            @foreach ($industry as $key => $industryChunk)
+                                <div class="col-lg-4 col-md-6 {{ $key > 4 ? 'mobile-none' : '' }}">
+                                    <div class="card job-Categories-box bg-light border-0">
+                                        <div class="card-body px-3 py-2">
+                                            <ul class="list-unstyled job-Categories-list mb-0">
+                                                @foreach ($industryChunk as $industry)
+                                                    <li>
+                                                        <a href="{{ route('jobs', ['industry' => $industry->slug]) }}"
+                                                           class="primary-link">{{ $industry->name }}
+
+                                                            <span
+                                                                class="badge bg-soft-info float-end">{{ $industry->jobs->count() }}</span></a>
+                                                    </li>
+                                                @endforeach
+
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            @endforeach
+                            @if ($industry->count() > 5)
+                                <div class="mobile-see-more">
+                                    <span class="click-show">See</span> <span class="click-remove d-none">Remove</span>
+                                    More Industry ({{ $industry->count() }})
+                                    <span class="top-icon">
+                                        <i class="fa-solid fa-angle-down"></i>
+                                    </span>
+                                </div>
+                            @endif
+
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="company-job" role="tabpanel" aria-labelledby="company-job-tab">
+                        <br>
+                        <div class="row">
+                            @foreach ($employers->chunk(1) as $key => $employersChunk)
+                                <div class="col-lg-4 col-md-6 {{ $key > 4 ? 'mobile-none' : '' }}">
+                                    <div class="card job-Categories-box bg-light border-0">
+                                        <div class="card-body px-3 py-2">
+
+                                            <ul class="list-unstyled job-Categories-list mb-0">
+                                                @foreach ($employersChunk as $employer)
+                                                    <li>
+                                                        <a href="{{ route('jobs', ['company' => $employer->slug]) }}"
+                                                           class="primary-link">{{ $employer->company_name }}<span
+                                                                class="badge bg-soft-info float-end">{{ $employer->jobs->count() }}</span></a>
+                                                    </li>
+                                                @endforeach
+
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            @endforeach
+                            @if ($employer->count() > 5)
+                                <div class="mobile-see-more">
+                                    <span class="click-show">See</span> <span class="click-remove d-none">Remove</span>
+                                    More Industry ({{ $employer->count() }})
+                                    <span class="top-icon">
+                                        <i class="fa-solid fa-angle-down"></i>
+                                    </span>
+                                </div>
+                            @endif
+                        </div>
+                    </div>
+                    <!--end freelancer-tab-->
+                    <div class="tab-pane fade" id="location-job" role="tabpanel" aria-labelledby="location-job-tab">
+                        <br>
+                        <div class="row">
+
+                            @foreach ($locations->chunk(1) as $key => $locationChunk)
+                                <div class="col-lg-4 col-md-6 {{ $key > 4 ? 'mobile-none' : '' }}">
+                                    <div class="card job-Categories-box bg-light border-0">
+                                        <div class="card-body px-3 py-2">
+                                            <ul class="list-unstyled job-Categories-list mb-0">
+                                                @foreach ($locationChunk as $location)
+                                                    <li>
+                                                        <a href="{{ route('jobs', ['location' => $location->slug]) }}"
+                                                           class="primary-link">{{ $location->name }}
+                                                            <span
+                                                                class="badge bg-soft-info float-end">{{ $location->jobs->count() }}</span></a>
+                                                    </li>
+                                                @endforeach
+
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            @endforeach
+                            @if ($locations->count() > 5)
+                                <div class="mobile-see-more">
+                                    <span class="click-show">See</span> <span class="click-remove d-none">Remove</span>
+                                    More Industry ({{ $locations->count() }})
+                                    <span class="top-icon">
+                                        <i class="fa-solid fa-angle-down"></i>
+                                    </span>
+                                </div>
+                            @endif
+
+                            <!--end col-->
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="skill-job" role="tabpanel" aria-labelledby="skill-job-tab">
+                        <br>
+                        <div class="row">
+                            @foreach ($categories->chunk(1) as $key => $categoryChunk)
+                                <div class="col-lg-4 col-md-6 {{ $key > 4 ? 'mobile-none' : '' }}">
+                                    <div class="card job-Categories-box bg-light border-0">
+                                        <div class="card-body px-3 py-2">
+                                            <ul class="list-unstyled job-Categories-list mb-0">
+                                                @foreach ($categoryChunk as $category)
+                                                    <li>
+                                                        <a href="{{ route('jobs', ['category' => $category->slug]) }}"
+                                                           class="primary-link">{{ $category->title }}
+                                                            <span
+                                                                class="badge bg-soft-info float-end">{{ $category->jobs->count() }}</span></a>
+                                                    </li>
+                                                @endforeach
+
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            @endforeach
+                            @if ($categories->count() > 5)
+                                <div class="mobile-see-more">
+                                    <span class="click-show">See</span> <span class="click-remove d-none">Remove</span>
+                                    More Industry ({{ $categories->count() }})
+                                    <span class="top-icon">
+                                        <i class="fa-solid fa-angle-down"></i>
+                                    </span>
+                                </div>
+                            @endif
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
         <section class="bg-light py-5" style="background-color: #fff !important;">
             <div class="py-3 hiring-top-company">
                 <div class="container">
@@ -876,6 +876,7 @@
 
                 </div>
             </div>
+
             <div class="py-3 hiring-top-company">
                 <div class="container">
                     <div class="hiring-top-title">

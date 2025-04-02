@@ -108,7 +108,7 @@
 {{--                                                            </button>--}}
 {{--                                                        </form>--}}
                                                         <button type="button" class="btn btn-outline-danger mx-1" onclick="confirmDelete('{{ $job->slug }}')">
-                                                            <i class="fas fa-trash"></i>
+                                                            <i class="fa fa-trash"></i>
                                                         </button>
 
 

@@ -1,87 +1,144 @@
-@section('style')
-    <link rel="stylesheet" href="{{ asset('backend/assets/vendor/nestable/jquery-nestable.css') }}">
-    <link rel="stylesheet" href="{{ asset('backend/assets/vendor/sweetalert/sweetalert.css') }}"/>
-@endsection
+@extends('admin.layouts.app')
+@section('title', 'Employer Management')
 @push('style')
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap4.min.css" />
-    <style>
-        .wrapper .page-wrap .main-content .page-header .page-header-title i {
-            width: 50px !important;
-            height: 50px !important;
-        }
-    </style>
 @endpush
-<div class="row clearfix">
-    <div class="col-lg-12">
-        <div class="tab-content mt-0">
-            <div class="tab-pane show active" id="Pages">
-                <div class="container-fluid">
-                    <div class="row ">
-                        <div class="col-md-12">
-                            <div class="card">
-                                <div class="body">
-                                    <div class="table-responsive p-3">
-                                        <table id="datatable" class="table table-striped table-bordered">
-                                            <thead>
-                                            <tr>
-                                                <th>Name</th>
-                                                <th>Mobile</th>
-                                                <th>Email</th>
-                                            </tr>
-                                            </thead>
-                                            <tbody>
-                                            @foreach ($trainingEnroll as $te)
-                                                <tr>
-                                                    <td>{{ $te->name }}</td>
-                                                    <td>{{ $te->mobile }}</td>
-                                                    <td>{{ $te->email }}</td>
-
-{{--                                                    <td class="col">--}}
-{{--                                                        <div class="list-actions">--}}
-{{--                                                            @can('role-list')--}}
-{{--                                                                <a href="{{ route('admin.roles.show', $te->id) }}"--}}
-{{--                                                                   class="btn btn-icon btn-primary"><i class="fa fa-eye"></i></a>--}}
-{{--                                                            @endcan--}}
-{{--                                                            @can('role-edit')--}}
-{{--                                                                <a href="{{ route('admin.roles.edit', $te->id) }}"--}}
-{{--                                                                   class="btn btn-icon btn-info"><i class="fa fa-edit"></i></a>--}}
-{{--                                                            @endcan--}}
-{{--                                                            @can('role-delete')--}}
-{{--                                                                <a href="#delete" data-toggle="modal"--}}
-{{--                                                                   class="btn btn-icon btn-danger"--}}
-{{--                                                                   onclick="delete_role('{{ base64_encode($te->id) }}')"><i--}}
-{{--                                                                        class="fa fa-trash"></i></a>--}}
-{{--                                                            @endcan--}}
-{{--                                                        </div>--}}
-{{--                                                    </td>--}}
-                                                </tr>
-                                            @endforeach
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-                            </div>
+@section('content')
+    <div class="container-fluid">
+        <div class="block-header">
+            <div class="row clearfix">
+                <div class="col-md-12 col-sm-12">
+                    @if (request()->routeIs('admin.admins.index'))
+                        <h1>Admin Management</h1>
+                    @else
+                        <h1>User Management</h1>
+                    @endif
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Dashboard</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Employer Management</li>
+                        </ol>
+                    </nav>
+                </div>
+                @can('user-create')
+                    <div class="col">
+                        <a href="{{ route('admin.employers.create') }}" class="btn btn-primary" style="float:right;"><i
+                                class="fa fa-plus"></i>&nbsp;Create Employer</a>
+                    </div>
+                @endcan
+            </div>
+        </div>
+        <div class="row clearfix">
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="body">
+                        <div class="table-responsive">
+                            <table id="datatable" class="table table-striped table-bordered">
+                                <thead data-test="datatable-head">
+                                <tr>
+                                    <th class="sorting">#</th>
+                                    <th class="sorting" aria-controls="DataTable" aria-label="Name">Name
+                                    </th>
+                                    <th class="sorting">Company Name</th>
+                                    <th class="sorting">Username</th>
+                                    <th>Office Number</th>
+                                    <th class="sorting">Created At</th>
+                                    <th class="sorting">Status</th>
+                                    <th class="">Action</th>
+                                </tr>
+                                </thead>
+                                <tbody data-test="table-body">
+                                    <?php $i = 0; ?>
+                                @foreach ($users as $key => $user)
+                                    <tr>
+                                        <td>{{ ++$key }}</td>
+                                        <td>{{ $user->name }}</td>
+                                        <td></td>
+{{--                                        <td>{{ $user->username }}</td>--}}
+                                        <td>phne no</td>
+{{--                                        <td>{{ date('d M, Y', strtotime($user->created_at)) }}</td>--}}
+                                        <td><spazn
+                                                class="badge badge-{{ $user->suspended ? 'danger' : 'success' }}">{{ $user->suspended ? 'Suspended' : 'Active' }}</spazn>
+                                        </td>
+{{--                                        <td class="d-flex">--}}
+{{--                                            @can('user-edit')--}}
+{{--                                                <form action="{{ route('admin.employers.suspended', $user->id) }}"--}}
+{{--                                                      method="POST">--}}
+{{--                                                    @csrf--}}
+{{--                                                    <button type="button"--}}
+{{--                                                            class="btn btn-{{ $user->suspended ? 'success' : 'danger' }}"--}}
+{{--                                                            name="suspended"--}}
+{{--                                                            onclick="verifycOnfirm(this, '{{ $user->suspended == 1 ? 'active' : 'suspend' }}')">--}}
+{{--                                                        <i class="fa fa-user-times"></i>--}}
+{{--                                                    </button>--}}
+{{--                                                </form>&nbsp;--}}
+{{--                                                <a href="{{ route('admin.employers.edit', $user->username) }}"--}}
+{{--                                                   class="btn btn-outline-warning" title="Edit"><i--}}
+{{--                                                        class="fa fa-edit"></i></a>&nbsp;--}}
+{{--                                            @endcan--}}
+{{--                                            @can('user-delete')--}}
+{{--                                                <form--}}
+{{--                                                    action="{{ route('admin.employers.delete', base64_encode($user->id)) }}"--}}
+{{--                                                    method="POST">--}}
+{{--                                                    @csrf--}}
+{{--                                                    @method('DELETE')--}}
+{{--                                                    <button type="button" onclick="COnfirmDelete(this)"--}}
+{{--                                                            class="btn btn-outline-danger">--}}
+{{--                                                        <i class="fa fa-trash"></i></button>--}}
+{{--                                                </form>--}}
+{{--                                            @endcan--}}
+{{--                                        </td>--}}
+                                    </tr>
+                                @endforeach
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                 </div>
-
             </div>
         </div>
     </div>
-</div>
-@section('script')
-    <script src="{{ asset('backend/assets/vendor/nestable/jquery.nestable.js') }}"></script>
-    <script src="{{asset('backend/html/assets/js/pages/ui/sortable-nestable.js')}}"></script>
+@endsection
+@push('script')
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap4.min.js"></script>
     <script>
-        $("#nestable").nestable();
-    </script>
-    <script src="{{ asset('backend/assets/vendor/sweetalert/sweetalert.min.js') }}"></script>
-    <script>
-        function COnfirmDelete(elem) {
-            var id = elem;
+        new DataTable('#datatable');
+
+        function verifycOnfirm(data, status) {
             swal({
                 title: "Are you sure?",
-                text: "You will not be able to recover this again !",
+                text: "This will change the status to " + status,
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#dc3545",
+                confirmButtonText: "Yes, " + status + " it!",
+                cancelButtonText: "No",
+                closeOnConfirm: false,
+                closeOnCancel: false
+            }, function(isConfirm) {
+                if (isConfirm) {
+                    swal({
+                        title: status.toUpperCase(),
+                        text: "This user is now " + status,
+                        type: "success",
+                        showCancelButton: false,
+                        confirmButtonColor: "#28a745",
+                        confirmButtonText: "Okay",
+                        closeOnConfirm: false,
+                        closeOnCancel: false
+                    });
+                    $(data).closest('form').submit();
+                } else {
+                    swal("Cancelled", "Process has been canceled", "error");
+                }
+            });
+        }
+
+        function COnfirmDelete(elem) {
+            swal({
+                title: "Are you sure?",
+                text: "You will not be able to recover this User!",
                 type: "warning",
                 showCancelButton: true,
                 confirmButtonColor: "#dc3545",
@@ -89,81 +146,15 @@
                 cancelButtonText: "No, cancel plx!",
                 closeOnConfirm: false,
                 closeOnCancel: false
-            }, function (isConfirm) {
+            }, function(isConfirm) {
                 if (isConfirm) {
+                    jQuery(elem).closest("form").submit();
 
-                    $.ajax({
-                        method: "POST",
-                        url: '{{ route("admin.training.destroy") }}',
-                        data: {
-                            '_token' : '{{ csrf_token() }}',
-                            'id' : id
-                        },
-                        success:function(res)
-                        {
-                             swal({
-                                    title: "Deleted",
-                                    text: "Training has been deleted!",
-                                    type: "success",
-                                    showCancelButton: false,
-                                    confirmButtonColor: "#28a745",
-                                    confirmButtonText: "Okay",
-                                    closeOnConfirm: false,
-                                    closeOnCancel: false
-                                }, function (isConfirm) {
-                                    if(isConfirm)
-                                    {
-                                        location.reload();
-                                    }
-                                }
-                            );
-                        },
-                        error:function(data)
-                        {
-                            // toastr.error("Sorry Something Went Wrong!!");
-                        }
-
-                    })
+                    swal("Deleted!", "Your User has been deleted.", "success");
                 } else {
-                    swal("Cancelled", "Your training is safe :)", "error");
+                    swal("Cancelled", "Your User is safe :)", "error");
                 }
             });
         }
     </script>
-{{--     <script>--}}
-{{--        $(document).ready(function() {--}}
-{{--            var updateOutput = function(e) {--}}
-{{--                var list = e.length ? e : $(e.target),--}}
-{{--                    output = list.data('output');--}}
-{{--                $.ajax({--}}
-{{--                    method: "POST",--}}
-{{--                    url: "{{ route('admin.training.order') }}",--}}
-{{--                    data: {--}}
-{{--                        '_token': $('input[name=_token]').val(),--}}
-{{--                        list_order: list.nestable('serialize'),--}}
-{{--                        table: "categories"--}}
-{{--                    },--}}
-{{--                    success: function(response) {--}}
-{{--                        // console.log("success");--}}
-{{--                        // console.log("response " + response);--}}
-{{--                        var obj = jQuery.parseJSON(response);--}}
-{{--                        if (obj.status == 'success') {--}}
-{{--                            toastr.success("Content Sorted Successfully");--}}
-{{--                        }--}}
-{{--                        if (obj.status == 'error') {--}}
-{{--                            toastr.error("Sorry Something Went Wrong!!");--}}
-{{--                        };--}}
-
-{{--                    }--}}
-{{--                }).fail(function(jqXHR, textStatus, errorThrown) {--}}
-{{--                    toastr.error("Something Went Wrong!");--}}
-{{--                });--}}
-{{--            };--}}
-
-{{--            $('#nestable').nestable({--}}
-{{--                group: 1,--}}
-{{--                maxDepth: 1,--}}
-{{--            }).on('change', updateOutput);--}}
-{{--        });--}}
-{{--    </script>--}}
-@endsection
+@endpush
